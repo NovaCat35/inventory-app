@@ -1,18 +1,29 @@
+$color: rgb(8, 8, 182);
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+  color: #1ab5f2;
+  text-decoration: none;
 }
 
 h1 {
-  color: rgb(0, 0, 255);
+  color: $color;
 }
 
 nav {
+  background-color: rgb(6, 35, 94);
+  padding: 20px 30px;
+  color: white;
+  font-size: 20px;
   ul {
     display: flex;
+    list-style: none;
+    gap: 30px;
+    padding: 0;
+    margin: 0;
   }
 }
