@@ -9,6 +9,9 @@ a {
   cursor: pointer;
   color: #1ab5f2;
   text-decoration: none;
+  &:hover{
+    text-decoration: underline;
+  }
 }
 
 h1 {
