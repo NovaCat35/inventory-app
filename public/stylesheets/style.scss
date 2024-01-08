@@ -6,6 +6,7 @@ body {
 }
 
 a {
+  cursor: pointer;
   color: #1ab5f2;
   text-decoration: none;
 }
@@ -15,6 +16,9 @@ h1 {
 }
 
 nav {
+  a{
+    color: white;
+  }
   background-color: rgb(6, 35, 94);
   padding: 20px 30px;
   color: white;

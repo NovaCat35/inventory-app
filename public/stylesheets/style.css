@@ -4,6 +4,7 @@ body {
 }
 
 a {
+  cursor: pointer;
   color: #1ab5f2;
   text-decoration: none;
 }
@@ -17,6 +18,9 @@ nav {
   padding: 20px 30px;
   color: white;
   font-size: 20px;
+}
+nav a {
+  color: white;
 }
 nav ul {
   display: flex;

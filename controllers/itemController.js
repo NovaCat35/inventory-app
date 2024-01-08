@@ -4,7 +4,10 @@ const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
 exports.item_list = asyncHandler(async (req, res, next) => {
-	const allItems = await Item.find().sort({ name: 1 }).exec();
+	const allItems = await Item.find()
+	.populate('category')
+	.sort({ name: 1 })
+	.exec();
 	res.render("item_list", {
 		title: "All Items",
 		item_list: allItems,
