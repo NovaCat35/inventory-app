@@ -2,16 +2,16 @@
 <html lang="en">
 <%- include('templates/head') %>
 <body>
-   <%- include('templates/navbar') %>
-   <% item_list.forEach(item => { %>
+   <%- include('templates/navbar')  %>
+   <h1><%= category.name %></h1>
+   <% category_items.forEach(item => { %>
       <div class="item-container">
          <h2><%= item.name %></h2>
-         <p><a href=<%= item.category.url %>><%= item.category.name %></a></p>
          <p>$<%= item.price %></p>
          <% if (item.number_in_stock <= 20) { %>
             <p class="num-in-stock">Only <%= item.number_in_stock%> left in stock</p>
          <% } %>
       </div>
-   <% }); %>
+   <% }) %>
 </body>
 </html>

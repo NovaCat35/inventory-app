@@ -22,7 +22,7 @@ exports.category_list = asyncHandler(async (req, res, next) => {
 });
 
 exports.category_detail = asyncHandler(async (req, res, next) => {
-	const [category, allItemsInCategory] = await Promise.all([Category.findById(req.params.id).exec(), Item.find({ category: req.params.id }, "name").exec()]);
+	const [category, allItemsInCategory] = await Promise.all([Category.findById(req.params.id).exec(), Item.find({ category: req.params.id }, "name price number_in_stock").exec()]);
 
 	if (category == null) {
 		// No results.
