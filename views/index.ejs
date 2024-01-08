@@ -5,7 +5,16 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <%- include('templates/navbar')  %>
+    <h1>Inventory App</h1>
+    <p>Welcome to my inventory application!</p>
+    <hr>
+    <h2>Status</h2>
+    <dl>
+      <dt>Total Categories</dt>
+      <dd><%= categories.length %></dd>
+      <dt>Number of Items</dt>
+      <dd><%= items.length %></dd>
+    </dl>
   </body>
 </html>
