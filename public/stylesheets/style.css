@@ -68,7 +68,7 @@ nav ul {
   bottom: 0;
 }
 
-.num-in-stock-alert, .error-msg {
+.num-in-stock-alert, .error-msg, .empty-alert {
   color: rgb(214, 10, 10);
 }
 
