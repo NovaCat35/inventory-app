@@ -3,7 +3,10 @@
 	<%- include('templates/head') %>
 	<body>
 		<%- include('templates/navbar') %>
-      <h1>All Categories</h1>
+      <div class="header-container">
+			<h1>All Categories</h1>
+			<a href="/inventory/category/create"><img class="add-icon" src="/images/add-icon.svg" alt="add icon button"></a>
+		</div>
 		<ul>
 			<% for(let i = 0; i < category_list.length; i++) { %>
 			<li><a href=<%= category_list[i].url %>><%= category_list[i].name %></a></li>

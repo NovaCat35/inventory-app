@@ -3,13 +3,16 @@
 <%- include('templates/head') %>
 <body>
    <%- include('templates/navbar')  %>
-   <h1><%= category.name %></h1>
+   <div class="category_detail_header">
+      <h1 class="name"><%= category.name %></h1>
+      <p class="description"><%= category.description %></p>
+   </div>
    <% category_items.forEach(item => { %>
       <div class="item-container">
-         <h2><a href=<%= item.url %>><%= item.name %></a></h2>
+         <h2 class="item-name"><a href=<%= item.url %>><%= item.name %></a></h2>
          <p>$<%= item.price %></p>
          <% if (item.number_in_stock <= 20) { %>
-            <p class="num-in-stock">Only <%= item.number_in_stock%> left in stock</p>
+            <p class="num-in-stock-alert">Only <%= item.number_in_stock%> left in stock</p>
          <% } %>
       </div>
    <% }) %>

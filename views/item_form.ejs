@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<%- include('templates/head') %>
+<body>
+   <%- include('templates/navbar') %>
+   <form method='post' action="">
+      <div class="form-group">
+         <label for="item_name">Item Name</label>
+         <input type="text" name="item_name" id="item_name" placeholder="Moomin Padlock" required>
+      </div>
+
+      <div class="form-group">
+         <label for="item_description">Description</label>
+         <textarea name="item_description" id="item_description" rows="4" cols="50"
+         placeholder="This novelty lock can last 20 seconds longer than any Master Lock under the superior lock picking skills of the LockPickingLawyer." required></textarea>
+      </div>
+
+      <div>
+         <label for="item_category">Category</label>
+         <select name="item_category" id="item_category">
+            <option value="none" selected disabled hidden>-- Select an Option --</option> 
+            <% categories.forEach(category => { %>
+               <option value=<%= category.name %>><%= category.name %></option>
+            <% }) %>
+         </select>
+      </div>
+
+      <div class="form-group">
+         <label for="item_price">Price</label>
+         <input type="text" name="item_price" id="item_price" placeholder="7.99">
+      </div>
+
+      <div class="form-group">
+         <label for="item_num_in_stock">Number in Stock</label>
+         <input type="text" name="item_num_in_stock" id="item_num_in_stock" placeholder="50">
+      </div>
+
+      <button type="submit">Submit</button>
+   </form>
+</body>
+</html>

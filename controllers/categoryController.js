@@ -7,7 +7,7 @@ const { body, validationResult } = require("express-validator");
 exports.index = asyncHandler(async (req, res, next) => {
 	const [allCategories, allItems] = await Promise.all([Category.find({}).exec(), Item.find({}).exec()]);
 	res.render("index", {
-		title: 'My Inventory App',
+		title: "My Inventory App",
 		categories: allCategories,
 		items: allItems,
 	});
@@ -36,5 +36,11 @@ exports.category_detail = asyncHandler(async (req, res, next) => {
 		title: "Category Detail",
 		category: category,
 		category_items: allItemsInCategory,
+	});
+});
+
+exports.category_create = asyncHandler(async (req, res, next) => {
+	res.render("category_form", {
+		title: "Create Category",
 	});
 });
