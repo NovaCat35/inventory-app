@@ -28,7 +28,15 @@ exports.item_detail = asyncHandler(async (req, res, next) => {
 	});
 });
 
-exports.item_create = asyncHandler(async (req, res, next) => {
+exports.item_create_get = asyncHandler(async (req, res, next) => {
+	const category_list = await Category.find({}).exec();
+	res.render("item_form", {
+		title: "Create Item",
+		categories: category_list,
+	});
+});
+
+exports.item_create_post = asyncHandler(async (req, res, next) => {
 	const category_list = await Category.find({}).exec();
 	res.render("item_form", {
 		title: "Create Item",

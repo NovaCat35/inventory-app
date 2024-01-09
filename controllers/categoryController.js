@@ -39,8 +39,42 @@ exports.category_detail = asyncHandler(async (req, res, next) => {
 	});
 });
 
-exports.category_create = asyncHandler(async (req, res, next) => {
+exports.category_create_get = asyncHandler(async (req, res, next) => {
 	res.render("category_form", {
 		title: "Create Category",
 	});
 });
+
+exports.category_create_post = [
+	// Validate and sanitize fields.
+	body("category_name", "Invalid name").trim().isLength({ min: 1 }).escape(),
+	body("category_description", "Invalid description").trim().isLength({ min: 10 }).escape(),
+
+	// Process request after validation and sanitization.
+	asyncHandler(async (req, res, next) => {
+		// Extract the validation errors from a request.
+		const errors = validationResult(req);
+
+		// Create Category Object with escaped and trimmed data
+		const category = new Category({
+			name: req.body.category_name,
+			description: req.body.category_description,
+		})
+
+		if(!errors.isEmpty()) {
+			// There are errors. Render form again with sanitized values/errors messages.
+			res.render('category_form', {
+				title: "Create Category",
+				category: category,
+				errors: errors.array(),
+			})
+		} else {
+			// Save category.
+			await category.save();
+			// Redirect to new category record
+			res.redirect(category.url);
+		}
+	}),
+];
+
+exports.category_create_post;
