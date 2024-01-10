@@ -43,7 +43,7 @@ exports.item_create_get = asyncHandler(async (req, res, next) => {
 exports.item_create_post = [
 	// Validate and sanitize fields.
 	body("item_name").trim().notEmpty().withMessage("Item name is required").isLength({ min: 2 }).withMessage("Item name's minimum length is 2").escape(),
-	body("item_description").trim().notEmpty().withMessage("Item description is required").isLength({ min: 50 }).withMessage("Item description's min length is 50").escape(),
+	body("item_description").trim().notEmpty().withMessage("Item description is required").isLength({ max: 300 }).withMessage("Item description's length must be less than 300 characters").escape(),
 	body("item_category").trim().notEmpty().withMessage("Item category is required").escape(),
 	body("item_price").trim().notEmpty().withMessage("Item price is required").isNumeric().withMessage("Item price must be a number").escape(),
 	body("item_num_in_stock").trim().notEmpty().withMessage("Number in stock is required").isInt({ min: 1 }).withMessage("Number in stock must be greater than zero").escape(),
@@ -95,7 +95,7 @@ exports.item_update_get = asyncHandler(async (req, res, next) => {
 exports.item_update_post = [
 	// Validate and sanitize fields.
 	body("item_name").trim().notEmpty().withMessage("Item name is required").isLength({ min: 2 }).withMessage("Item minimum length is 2").escape(),
-	body("item_description").trim().notEmpty().withMessage("Item description is required").escape(),
+	body("item_description").trim().notEmpty().withMessage("Item description is required").isLength({ max: 300 }).withMessage("Item description's length must be less than 300 characters").escape(),
 	body("item_category").trim().notEmpty().withMessage("Item category is required").escape(),
 	body("item_price").trim().notEmpty().withMessage("Item price is required").isNumeric().withMessage("Item price must be a number").escape(),
 	body("item_num_in_stock").trim().notEmpty().withMessage("Number in stock is required").isInt({ min: 1 }).withMessage("Number in stock must be greater than zero").escape(),

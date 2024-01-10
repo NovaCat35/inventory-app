@@ -3,24 +3,26 @@
 	<%- include('templates/head') %>
 	<body>
 		<%- include('templates/navbar') %>
-		<h1><%= title %></h1>
-		<h2>Category: <%= category.name %></h2>
-		<% if(items && items.length > 0) { %>
-         <p class="alert">This category still contain items!</p>
-         <p>Please delete all items first.</p>
-         <ul>
-            <% items.forEach(item => { %>
-            <li>
-               <a href="<%= item.url %>"><%= item.name %></a>
-            </li>
-            <% }) %>
-         </ul>
-		<% } else { %>
-		<p>Are you sure you want to delete?</p>
-		<form method="post" action="">
-			<input type="hidden" name="" id="" />
-			<button type="submit">Confirm</button>
-		</form>
-		<% } %>
+		<main>
+			<h1><%= title %></h1>
+			<h2>Category: <%= category.name %></h2>
+			<% if(items && items.length > 0) { %>
+						<p class="alert">This category still contain items!</p>
+						<p>Please delete all items first.</p>
+						<ul>
+							<% items.forEach(item => { %>
+							<li>
+								<a href="<%= item.url %>"><%= item.name %></a>
+							</li>
+							<% }) %>
+						</ul>
+			<% } else { %>
+			<p>Are you sure you want to delete?</p>
+			<form method="post" action="">
+				<input type="hidden" name="" id="" />
+				<button type="submit">Confirm</button>
+			</form>
+			<% } %>
+		</main>
 	</body>
 </html>

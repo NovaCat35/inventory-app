@@ -3,21 +3,23 @@
 <%- include('templates/head') %>
 <body>
    <%- include('templates/navbar') %>
-   <div class="header-container">
-      <h1>All Items</h1>
-      <a href="/inventory/items/create"><img class="add-icon" src="/images/add-icon.svg" alt="add icon button"></a>
-   </div>
-   <div class="item-list-container">
-      <% item_list.forEach(item => { %>
-         <div class="item-container">
-            <h2 class="item-name"><a href=<%= item.url %>><%= item.name %></a></h2>
-            <p><a href=<%= item.category.url %>><%= item.category.name %></a></p>
-            <p>$<%= item.price %></p>
-            <% if (item.number_in_stock <= 20) { %>
-               <p class="num-in-stock-alert">Only <%= item.number_in_stock%> left in stock</p>
-            <% } %>
-         </div>
-      <% }); %>
-   </div>
+   <main>
+      <div class="header-container">
+         <h1>All Items</h1>
+         <a href="/inventory/items/create"><img class="add-icon" src="/images/add-icon.svg" alt="add icon button"></a>
+      </div>
+      <div class="item-list-container">
+         <% item_list.forEach(item => { %>
+            <div class="item-container">
+               <h2 class="item-name"><a href=<%= item.url %>><%= item.name %></a></h2>
+               <p><a href=<%= item.category.url %>><%= item.category.name %></a></p>
+               <p>$<%= item.price %></p>
+               <% if (item.number_in_stock <= 20) { %>
+                  <p class="num-in-stock-alert">Only <%= item.number_in_stock%> left in stock</p>
+               <% } %>
+            </div>
+         <% }); %>
+      </div>
+   </main>
 </body>
 </html>

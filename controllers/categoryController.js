@@ -52,7 +52,7 @@ exports.category_create_get = asyncHandler(async (req, res, next) => {
 exports.category_create_post = [
 	// Validate and sanitize fields.
 	body("category_name", "Invalid name").trim().isLength({ min: 1 }).escape(),
-	body("category_description", "Invalid description").trim().isLength({ min: 10 }).escape(),
+	body("category_description", "Invalid description").trim().notEmpty().isLength({ max: 200 }).withMessage("Category description's length must be less than 200 characters").escape(),
 
 	// Process request after validation and sanitization.
 	asyncHandler(async (req, res, next) => {
@@ -117,7 +117,7 @@ exports.category_update_get = asyncHandler(async (req, res, next) => {
 exports.category_update_post = [
 	// Validate and sanitize fields.
 	body("category_name", "Invalid name").trim().notEmpty().escape(),
-	body("category_description", "Invalid description").trim().isLength({ min: 10 }).escape(),
+	body("category_description", "Invalid description").trim().notEmpty().isLength({ max: 200 }).withMessage("Category description's length must be less than 200 characters").escape(),
 
 	asyncHandler(async (req, res, next) => {
 		const errors = validationResult(req);

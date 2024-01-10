@@ -3,27 +3,29 @@
 <%- include('templates/head') %>
 <body>
    <%- include('templates/navbar')  %>
-   <div class="category_detail_header">
-      <div class="header-container">
-         <h1 class="name"><%= category.name %></h1>
-         <a href="<%= category.url %>/update"><img class="edit-icon" src="/images/edit-icon.svg" alt="edit-icon"></a>
-         <a href="<%= category.url %>/delete"><img class="delete-icon" src="/images/delete-icon.svg" alt="delete-icon"></a>
-      </div>
-      <p class="description"><%= category.description %></p>
-   </div>
-   <hr>
-   <% if(category_items.length !== 0) { %>
-      <% category_items.forEach(item => { %>
-         <div class="item-container">
-            <h2 class="item-name"><a href=<%= item.url %>><%= item.name %></a></h2>
-            <p>$<%= item.price %></p>
-            <% if (item.number_in_stock <= 20) { %>
-               <p class="num-in-stock-alert">Only <%= item.number_in_stock%> left in stock</p>
-            <% } %>
+   <main>
+      <div class="category_detail_header">
+         <div class="header-container">
+            <h1 class="name"><%= category.name %></h1>
+            <a href="<%= category.url %>/update"><img class="edit-icon" src="/images/edit-icon.svg" alt="edit-icon"></a>
+            <a href="<%= category.url %>/delete"><img class="delete-icon" src="/images/delete-icon.svg" alt="delete-icon"></a>
          </div>
-      <% }) %>
-   <% } else { %>
-      <p class="empty-alert">There are currently no items in this category.</p>
-   <% } %>
+         <p class="description"><%= category.description %></p>
+      </div>
+      <hr>
+      <% if(category_items.length !== 0) { %>
+         <% category_items.forEach(item => { %>
+            <div class="item-container">
+               <h2 class="item-name"><a href=<%= item.url %>><%= item.name %></a></h2>
+               <p>$<%= item.price %></p>
+               <% if (item.number_in_stock <= 20) { %>
+                  <p class="num-in-stock-alert">Only <%= item.number_in_stock%> left in stock</p>
+               <% } %>
+            </div>
+         <% }) %>
+      <% } else { %>
+         <p class="empty-alert">There are currently no items in this category.</p>
+      <% } %>
+   </main>
 </body>
 </html>

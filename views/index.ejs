@@ -3,15 +3,25 @@
   <%- include('templates/head')  %>
   <body>
     <%- include('templates/navbar')  %>
-    <h1>Inventory App</h1>
-    <p>Welcome to my inventory application! This project is part of my roadmap for a full stack dev on <a href="https://www.theodinproject.com/lessons/nodejs-inventory-application" target="_blank">The Odin Project</a> Inventory Application.</p>
-    <hr>
-    <h2>Status</h2>
-    <dl>
-      <dt>Total Categories</dt>
-      <dd><%= categories.length %></dd>
-      <dt>Number of Items</dt>
-      <dd><%= items.length %></dd>
-    </dl>
+    <main>
+      <h1>Inventory App</h1>
+      <p>Welcome to my inventory application! This project is part of my roadmap towards my dream to become a full stack dev. Project inspiration can be found on <a href="https://www.theodinproject.com/lessons/nodejs-inventory-application" target="_blank">The Odin Project</a> Inventory Application.</p>
+      <p>This project essentially allows you to add categories and items under each category. Give it a go!</p>
+      <p>
+        . ╱|、<br>
+        (˚ˎ 。7<br>
+        |、˜〵<br>
+        じしˍ,)ノ
+      </p>
+      
+      <hr>
+      <h2>Status</h2>
+      <dl>
+        <dt>Total Categories</dt>
+        <dd><%= categories.length %></dd>
+        <dt>Number of Items</dt>
+        <dd><%= items.length %></dd>
+      </dl>
+    </main>
   </body>
 </html>

@@ -3,14 +3,22 @@
 	<%- include('templates/head') %>
 	<body>
 		<%- include('templates/navbar') %>
-      <div class="header-container">
-			<h1>All Categories</h1>
-			<a href="/inventory/categories/create"><img class="add-icon" src="/images/add-icon.svg" alt="add icon button"></a>
-		</div>
-		<ul>
-			<% for(let i = 0; i < category_list.length; i++) { %>
-			<li><a href=<%= category_list[i].url %>><%= category_list[i].name %></a></li>
+      <main>
+			<div class="header-container">
+				<h1>All Categories</h1>
+				<a href="/inventory/categories/create"><img class="add-icon" src="/images/add-icon.svg" alt="add icon button"></a>
+			</div>
+			<% if(typeof category_list !== 'undefined') { %>
+				<ul class="list">
+					<% for(let i = 0; i < category_list.length; i++) { %>
+					<li><a href=<%= category_list[i].url %>><%= category_list[i].name %></a></li>
+					<% } %>
+				</ul>
+			<% } else { %>
+				<h2>There are currently no categories!</h2>
+				<p>You can add a category with the add icon above</p>
+				<img class="add-icon" src="/images/add-icon.svg" alt="add icon button">
 			<% } %>
-		</ul>
+		</main>
 	</body>
 </html>

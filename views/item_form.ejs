@@ -3,51 +3,48 @@
 	<%- include('templates/head') %>
 <body>
    <%- include('templates/navbar') %>
-   <h1><%= title %></h1>
-   <form method='post' action="">
-      <div class="form-group">
-         <label for="item_name">Item Name</label>
-         <input type="text" name="item_name" id="item_name" placeholder="Moomin Padlock" value="<%= (typeof item === "undefined" ? '' : item.name) %>" required>
-      </div>
-
-      <div class="form-group">
-         <label for="item_description">Description</label>
-         <textarea name="item_description" id="item_description" rows="4" cols="50" minlength="50" maxlength="500"
-         placeholder="This novelty lock can last 20 seconds longer than any Master Lock under the superior lock picking skills of the LockPickingLawyer." required><%= (typeof item === "undefined" ? '' : item.description) %></textarea>
-      </div>
-
-      <div>
-         <label for="item_category">Category</label>
-         <select name="item_category" id="item_category" required>
-            <option value="" selected disabled hidden>-- Select an Option --</option> 
-            <% categories.forEach(category => { %>
-               <option value="<%= category._id %>" <% if (typeof item !== "undefined" && typeof item.category !== "undefined" && item.category.toString() === category._id.toString()) { %>selected<% } %>>
-                  <%= category.name %>
-               </option>
+   <main>
+      <h1><%= title %></h1>
+      <form method='post' action="">
+         <div class="form-group">
+            <label for="item_name">Item Name *</label>
+            <input type="text" name="item_name" id="item_name" placeholder="Moomin Padlock" value="<%= (typeof item === "undefined" ? '' : item.name) %>" required>
+         </div>
+         <div class="form-group">
+            <label for="item_description">Description * </label>
+            <textarea name="item_description" id="item_description" rows="4" cols="50" minlength="50" maxlength="300"
+            placeholder="This novelty lock can last 20 seconds longer than any Master Lock under the superior lock picking skills of the LockPickingLawyer." required><%= (typeof item === "undefined" ? '' : item.description) %></textarea>
+         </div>
+         <div>
+            <label for="item_category">Category *</label>
+            <select name="item_category" id="item_category" required>
+               <option value="" selected disabled hidden>-- Select an Option --</option>
+               <% categories.forEach(category => { %>
+                  <option value="<%= category._id %>" <% if (typeof item !== "undefined" && typeof item.category !== "undefined" && item.category.toString() === category._id.toString()) { %>selected<% } %>>
+                     <%= category.name %>
+                  </option>
+               <% }) %>
+            </select>
+         </div>
+         <div class="form-group">
+            <label for="item_price">Price ($USD) *</label>
+            <input type="number" name="item_price" id="item_price" step="0.01" placeholder="7.99" value="<%= (typeof item === 'undefined' ? '' : item.price) %>" required>
+         </div>
+         <div class="form-group">
+            <label for="item_num_in_stock">Number in Stock *</label>
+            <input type="number" name="item_num_in_stock" id="item_num_in_stock" placeholder="50" value="<%= (typeof item === "undefined" ? '' : item.number_in_stock) %>" required>
+         </div>
+         <button type="submit">Submit</button>
+      </form>
+      
+      <% if (typeof errors !== "undefined" && errors.length > 0) { %>
+         <p>What the deuce?? >:(</p>
+         <ul>
+            <% errors.forEach(error => { %>
+               <li class="error-msg"><%= error.msg %>!</li>
             <% }) %>
-         </select>
-      </div>
-
-      <div class="form-group">
-         <label for="item_price">Price ($USD)</label>
-         <input type="number" name="item_price" id="item_price" step="0.01" placeholder="7.99" value="<%= (typeof item === 'undefined' ? '' : item.price) %>" required>
-      </div>
-
-      <div class="form-group">
-         <label for="item_num_in_stock">Number in Stock</label>
-         <input type="number" name="item_num_in_stock" id="item_num_in_stock" placeholder="50" value="<%= (typeof item === "undefined" ? '' : item.number_in_stock) %>" required>
-      </div>
-
-      <button type="submit">Submit</button>
-   </form>
-   
-   <% if (typeof errors !== "undefined" && errors.length > 0) { %> 
-      <p>What the deuce?? >:(</p>
-      <ul>
-         <% errors.forEach(error => { %>
-            <li class="error-msg"><%= error.msg %>!</li>
-         <% }) %>
-      </ul>
-   <% } %>
+         </ul>
+      <% } %>
+   </main>
 </body>
 </html>
