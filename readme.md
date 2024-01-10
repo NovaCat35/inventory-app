@@ -6,6 +6,9 @@ A inventory app to keep track of desired wish list [Work in progress...]
 ## Tools and Tech 🛠️
 - Node.js, Express.js, SCSS
 
+## Challenges
+Running into 404 and 500 pages sometimes as I change the routes and some code as more requirements popped up as I continue to handle get and post forms. The tough part is managing error occurrences in routes, controllers, and views.
+
 ## --- EXPRESS INSTALLATION 🚂 ---
 ### DEVELOPMENT 
 > Type in terminal the following : 

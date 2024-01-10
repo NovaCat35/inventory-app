@@ -42,8 +42,8 @@ exports.item_create_get = asyncHandler(async (req, res, next) => {
 // Handle Item create on POST.
 exports.item_create_post = [
 	// Validate and sanitize fields.
-	body("item_name").trim().notEmpty().withMessage("Item name is required").escape(),
-	body("item_description").trim().notEmpty().withMessage("Item description is required").escape(),
+	body("item_name").trim().notEmpty().withMessage("Item name is required").isLength({ min: 2 }).withMessage("Item name's minimum length is 2").escape(),
+	body("item_description").trim().notEmpty().withMessage("Item description is required").isLength({ min: 50 }).withMessage("Item description's min length is 50").escape(),
 	body("item_category").trim().notEmpty().withMessage("Item category is required").escape(),
 	body("item_price").trim().notEmpty().withMessage("Item price is required").isNumeric().withMessage("Item price must be a number").escape(),
 	body("item_num_in_stock").trim().notEmpty().withMessage("Number in stock is required").isInt({ min: 1 }).withMessage("Number in stock must be greater than zero").escape(),
@@ -65,6 +65,7 @@ exports.item_create_post = [
 				title: "Create Item",
 				item: item,
 				categories: category_list,
+				errors: errors.array(),
 			});
 		} else {
 			await item.save();
@@ -93,7 +94,7 @@ exports.item_update_get = asyncHandler(async (req, res, next) => {
 // Handle POST request from category form
 exports.item_update_post = [
 	// Validate and sanitize fields.
-	body("item_name").trim().notEmpty().withMessage("Item name is required").escape(),
+	body("item_name").trim().notEmpty().withMessage("Item name is required").isLength({ min: 2 }).withMessage("Item minimum length is 2").escape(),
 	body("item_description").trim().notEmpty().withMessage("Item description is required").escape(),
 	body("item_category").trim().notEmpty().withMessage("Item category is required").escape(),
 	body("item_price").trim().notEmpty().withMessage("Item price is required").isNumeric().withMessage("Item price must be a number").escape(),
@@ -119,6 +120,7 @@ exports.item_update_post = [
 				title: "Update Item",
 				categories: category_list,
 				item: item,
+				errors: errors.array(),
 			});
 			return;
 		} else {
@@ -127,3 +129,17 @@ exports.item_update_post = [
 		}
 	}),
 ];
+
+exports.item_delete_get = asyncHandler(async (req, res, next) => {
+	const item = await Item.findById(req.params.id, "name").exec();
+
+	if (item === null) {
+		// No results.
+		res.redirect("/items");
+	}
+
+	res.render("item_delete", {
+		title: "Delete Item",
+		item: item,
+	});
+});

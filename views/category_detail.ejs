@@ -7,9 +7,11 @@
       <div class="header-container">
          <h1 class="name"><%= category.name %></h1>
          <a href="<%= category.url %>/update"><img class="edit-icon" src="/images/edit-icon.svg" alt="edit-icon"></a>
+         <a href="<%= category.url %>/delete"><img class="delete-icon" src="/images/delete-icon.svg" alt="delete-icon"></a>
       </div>
       <p class="description"><%= category.description %></p>
    </div>
+   <hr>
    <% if(category_items.length !== 0) { %>
       <% category_items.forEach(item => { %>
          <div class="item-container">

@@ -12,7 +12,7 @@
 
 			<div class="form-group">
 				<label for="category_description">Description</label>
-				<textarea name="category_description" id="category_description" rows="4" cols="50" placeholder="Discover a collection of essential and stylish items designed to enhance your home's security while adding a touch of decor. Explore functional and aesthetic solutions for a safe and inviting living space."><%= (typeof category === "undefined" ? '' : category.description) %></textarea>
+				<textarea name="category_description" id="category_description" rows="4" cols="50" minLength="50" maxLength="200" placeholder="Discover a collection of essential and stylish items designed to enhance your home's security while adding a touch of decor. Explore functional and aesthetic solutions for a safe and inviting living space."><%= (typeof category === "undefined" ? '' : category.description) %></textarea>
 			</div>
 
 			<button type="submit">Submit</button>

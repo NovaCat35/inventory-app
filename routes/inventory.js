@@ -25,8 +25,12 @@ router.get("/categories/:id/update", category_controller.category_update_get);
 // POST request for updating category
 router.post("/categories/:id/update", category_controller.category_update_post);
 
+// GET request for deleting category.
+router.get("/categories/:id/delete", category_controller.category_delete_get);
+
 // GET request for one category. (~ NOTE: you must put this last so the url doesn't confuse regular /url with :id !!!!!!)
 router.get("/categories/:id", category_controller.category_detail);
+
 
 /** ITEM ROUTES **/
 // GET request for item list.
@@ -44,9 +48,10 @@ router.get("/items/:id/update", item_controller.item_update_get);
 // POST request for updating item
 router.post("/items/:id/update", item_controller.item_update_post);
 
+// GET request for deleting item.
+router.get("/items/:id/delete", item_controller.item_delete_get);
+
 // GET request for one item. (~ NOTE: you must put this last so the url doesn't confuse regular /url with :id !!!!!!)
 router.get("/items/:id", item_controller.item_detail);
-
-
 
 module.exports = router;

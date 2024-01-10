@@ -143,3 +143,15 @@ exports.category_update_post = [
 		}
 	})
 ]
+
+exports.category_delete_get = asyncHandler(async(req,res,next) => {
+	const [category, category_items] = await Promise.all([
+		Category.findById(req.params.id, 'name').exec(),
+		Item.find({category: req.params.id}).exec(),
+	]);
+	res.render('category_delete', {
+		title: 'Delete Category',
+		category: category,
+		items: category_items,
+	})
+})
