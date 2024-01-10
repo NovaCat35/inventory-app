@@ -1,9 +1,9 @@
 const Category = require("../models/category");
-const item = require("../models/item");
 const Item = require("../models/item");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
+// Display list of all Item.
 exports.item_list = asyncHandler(async (req, res, next) => {
 	const allItems = await Item.find().populate("category").sort({ name: 1 }).exec();
 	res.render("item_list", {
@@ -12,6 +12,7 @@ exports.item_list = asyncHandler(async (req, res, next) => {
 	});
 });
 
+// Display details of a specific item.
 exports.item_detail = asyncHandler(async (req, res, next) => {
 	const item = await Item.findById(req.params.id).populate("category").exec();
 
@@ -29,6 +30,7 @@ exports.item_detail = asyncHandler(async (req, res, next) => {
 	});
 });
 
+// Handle Item create on GET
 exports.item_create_get = asyncHandler(async (req, res, next) => {
 	const category_list = await Category.find({}).exec();
 	res.render("item_form", {
@@ -37,6 +39,7 @@ exports.item_create_get = asyncHandler(async (req, res, next) => {
 	});
 });
 
+// Handle Item create on POST.
 exports.item_create_post = [
 	// Validate and sanitize fields.
 	body("item_name").trim().notEmpty().withMessage("Item name is required").escape(),
@@ -47,7 +50,7 @@ exports.item_create_post = [
 
 	asyncHandler(async (req, res, next) => {
 		const errors = validationResult(req);
-		console.log(req.body.item_category)
+
 		const item = new Item({
 			name: req.body.item_name,
 			description: req.body.item_description,
@@ -55,7 +58,6 @@ exports.item_create_post = [
 			price: req.body.item_price,
 			number_in_stock: req.body.item_num_in_stock,
 		});
-
 
 		if (!errors.isEmpty()) {
 			const category_list = await Category.find({}).exec();
@@ -70,3 +72,23 @@ exports.item_create_post = [
 		}
 	}),
 ];
+
+// Display Item update form on GET.
+exports.item_update_get = asyncHandler(async (req, res, next) => {
+	const item = await Item.findById(req.params.id).exec();
+	const category_list = await Category.find({}).exec();
+
+	if (item === null) {
+		// No results.
+		const err = new Error("Category not found");
+		err.status = 404;
+		return next(err);
+	}
+	res.render("item_form", {
+		title: "Update Item",
+		categories: category_list,
+		item: item,
+	});
+});
+
+// Display Item update form on POST.

@@ -1,7 +1,9 @@
 # Inventory Application
 A inventory app to keep track of desired wish list [Work in progress...]
 
-## Tools and Tech 
+# Features 🎯
+
+## Tools and Tech 🛠️
 - Node.js, Express.js, SCSS
 
 ## --- EXPRESS INSTALLATION 🚂 ---

@@ -4,7 +4,10 @@
 <body>
    <%- include('templates/navbar')  %>
    <div class="category_detail_header">
-      <h1 class="name"><%= category.name %></h1>
+      <div class="header-container">
+         <h1 class="name"><%= category.name %></h1>
+         <a href="<%= category.url %>/update"><img class="edit-icon" src="/images/edit-icon.svg" alt="edit-icon"></a>
+      </div>
       <p class="description"><%= category.description %></p>
    </div>
    <% if(category_items.length !== 0) { %>

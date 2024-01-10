@@ -92,8 +92,11 @@ form{
 // Detail page specific header. Contains name & description
 .category_detail_header, .item_detail_header {
 	margin-bottom: 20px;
+	.header-container {
+		margin-top: 20px;
+	}
 	.name{
-		margin: 20px 0 0 0;
+		margin: 0 0;
 	}
 	.description {
 		margin-top: 10px;

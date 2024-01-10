@@ -86,8 +86,11 @@ form .form-group {
 .category_detail_header, .item_detail_header {
   margin-bottom: 20px;
 }
+.category_detail_header .header-container, .item_detail_header .header-container {
+  margin-top: 20px;
+}
 .category_detail_header .name, .item_detail_header .name {
-  margin: 20px 0 0 0;
+  margin: 0 0;
 }
 .category_detail_header .description, .item_detail_header .description {
   margin-top: 10px;

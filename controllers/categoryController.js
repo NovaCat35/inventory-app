@@ -13,6 +13,7 @@ exports.index = asyncHandler(async (req, res, next) => {
 	});
 });
 
+// Display list of all Categories.
 exports.category_list = asyncHandler(async (req, res, next) => {
 	const allCategory = await Category.find().sort({ name: 1 }).exec();
 	res.render("category_list", {
@@ -21,6 +22,7 @@ exports.category_list = asyncHandler(async (req, res, next) => {
 	});
 });
 
+// Display details of items from a specific Categories.
 exports.category_detail = asyncHandler(async (req, res, next) => {
 	const [category, allItemsInCategory] = await Promise.all([Category.findById(req.params.id).exec(), Item.find({ category: req.params.id }, "name price number_in_stock").exec()]);
 
@@ -39,12 +41,14 @@ exports.category_detail = asyncHandler(async (req, res, next) => {
 	});
 });
 
+// Display Category create form on GET.
 exports.category_create_get = asyncHandler(async (req, res, next) => {
 	res.render("category_form", {
 		title: "Create Category",
 	});
 });
 
+// Handle Category create on POST.
 exports.category_create_post = [
 	// Validate and sanitize fields.
 	body("category_name", "Invalid name").trim().isLength({ min: 1 }).escape(),
@@ -59,15 +63,15 @@ exports.category_create_post = [
 		const category = new Category({
 			name: req.body.category_name,
 			description: req.body.category_description,
-		})
+		});
 
-		if(!errors.isEmpty()) {
+		if (!errors.isEmpty()) {
 			// There are errors. Render form again with sanitized values/errors messages.
-			res.render('category_form', {
+			res.render("category_form", {
 				title: "Create Category",
 				category: category,
 				errors: errors.array(),
-			})
+			});
 		} else {
 			// Save category.
 			await category.save();
@@ -77,4 +81,20 @@ exports.category_create_post = [
 	}),
 ];
 
-exports.category_create_post;
+// Display Category update form on GET.
+exports.category_update_get = asyncHandler(async (req, res, next) => {
+	const category = await Category.findById(req.params.id).exec();
+
+	if (category === null) {
+		// No results.
+		const err = new Error("Category not found");
+		err.status = 404;
+		return next(err);
+	}
+	res.render("category_form", {
+		title: "Update Category",
+		category: category,
+	});
+});
+
+// Display Category update form on POST.
