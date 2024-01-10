@@ -119,39 +119,55 @@ exports.category_update_post = [
 	body("category_name", "Invalid name").trim().notEmpty().escape(),
 	body("category_description", "Invalid description").trim().isLength({ min: 10 }).escape(),
 
-	asyncHandler(async (req,res,next) => {
+	asyncHandler(async (req, res, next) => {
 		const errors = validationResult(req);
-		
+
 		// Create a category object with escaped/trimmed data and old id.
 		const category = new Category({
 			name: req.body.category_name,
 			description: req.body.category_description,
 			_id: req.params.id, // This is required, or a new ID will be assigned!
-		})
+		});
 
-		if(!errors.isEmpty()) {
+		if (!errors.isEmpty()) {
 			// There are errors. Render form again with sanitized values/error messages.
-			res.render('category_form', {
+			res.render("category_form", {
 				title: "Update Category",
 				category: category,
 				errors: errors.array(),
-			})
+			});
 			return;
 		} else {
 			await Category.findByIdAndUpdate(req.params.id, category).exec();
 			res.redirect(category.url);
 		}
-	})
-]
+	}),
+];
 
-exports.category_delete_get = asyncHandler(async(req,res,next) => {
-	const [category, category_items] = await Promise.all([
-		Category.findById(req.params.id, 'name').exec(),
-		Item.find({category: req.params.id}).exec(),
-	]);
-	res.render('category_delete', {
-		title: 'Delete Category',
+// Handle Category Delete on GET.
+exports.category_delete_get = asyncHandler(async (req, res, next) => {
+	const [category, category_items] = await Promise.all([Category.findById(req.params.id, "name").exec(), Item.find({ category: req.params.id }).exec()]);
+	res.render("category_delete", {
+		title: "Delete Category",
 		category: category,
 		items: category_items,
-	})
-})
+	});
+});
+
+// Handle Category Delete on POST.
+exports.category_delete_post = asyncHandler(async (req, res, next) => {
+	const [category, category_items] = await Promise.all([Category.findById(req.params.id, "name").exec(), Item.find({ category: req.params.id }).exec()]);
+
+	// Category has items, rerender page showing items that needs to be deleted.
+	if (category_items.length > 0) {
+		res.render("category_delete", {
+			title: "Delete Category",
+			category: category,
+			items: category_items,
+		});
+	} else {
+		// Category has no items, delete the object.
+		await Category.findByIdAndDelete(req.params.id);
+		res.redirect("/inventory/categories");
+	}
+});

@@ -25,6 +25,7 @@ h2 {
   margin: 0 0 10px 0;
 }
 
+
 // NAVBAR
 nav {
 	a {
@@ -73,7 +74,7 @@ nav {
 }
 
 // Alert color
-.num-in-stock-alert, .error-msg, .empty-alert {
+.num-in-stock-alert, .error-msg, .empty-alert, .alert {
   color: rgb(214, 10, 10);
 }
 
@@ -100,5 +101,13 @@ form{
 	}
 	.description {
 		margin-top: 10px;
+	}
+}
+
+// List
+.list {
+	li {
+		font-size: 1.3rem;
+		list-style: square;
 	}
 }

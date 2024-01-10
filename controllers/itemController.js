@@ -130,6 +130,7 @@ exports.item_update_post = [
 	}),
 ];
 
+// Handle Item Delete on GET.
 exports.item_delete_get = asyncHandler(async (req, res, next) => {
 	const item = await Item.findById(req.params.id, "name").exec();
 
@@ -142,4 +143,10 @@ exports.item_delete_get = asyncHandler(async (req, res, next) => {
 		title: "Delete Item",
 		item: item,
 	});
+});
+
+// Handle Item Delete on POST.
+exports.item_delete_post = asyncHandler(async (req, res, next) => {
+	await Item.findByIdAndDelete(req.params.id);
+	res.redirect("/inventory/items");
 });

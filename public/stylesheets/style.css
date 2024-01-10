@@ -68,7 +68,7 @@ nav ul {
   bottom: 0;
 }
 
-.num-in-stock-alert, .error-msg, .empty-alert {
+.num-in-stock-alert, .error-msg, .empty-alert, .alert {
   color: rgb(214, 10, 10);
 }
 
@@ -94,6 +94,11 @@ form .form-group {
 }
 .category_detail_header .description, .item_detail_header .description {
   margin-top: 10px;
+}
+
+.list li {
+  font-size: 1.3rem;
+  list-style: square;
 }
 
 /*# sourceMappingURL=style.css.map */
