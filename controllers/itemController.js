@@ -75,8 +75,7 @@ exports.item_create_post = [
 
 // Display Item update form on GET.
 exports.item_update_get = asyncHandler(async (req, res, next) => {
-	const item = await Item.findById(req.params.id).exec();
-	const category_list = await Category.find({}).exec();
+	const [item, category_list] = await Promise.all([Item.findById(req.params.id).exec(), Category.find({}).exec()]);
 
 	if (item === null) {
 		// No results.
@@ -91,4 +90,40 @@ exports.item_update_get = asyncHandler(async (req, res, next) => {
 	});
 });
 
-// Display Item update form on POST.
+// Handle POST request from category form
+exports.item_update_post = [
+	// Validate and sanitize fields.
+	body("item_name").trim().notEmpty().withMessage("Item name is required").escape(),
+	body("item_description").trim().notEmpty().withMessage("Item description is required").escape(),
+	body("item_category").trim().notEmpty().withMessage("Item category is required").escape(),
+	body("item_price").trim().notEmpty().withMessage("Item price is required").isNumeric().withMessage("Item price must be a number").escape(),
+	body("item_num_in_stock").trim().notEmpty().withMessage("Number in stock is required").isInt({ min: 1 }).withMessage("Number in stock must be greater than zero").escape(),
+
+	asyncHandler(async (req, res, next) => {
+		const errors = validationResult(req);
+		const category_list = await Category.find({}).exec();
+
+		// Create a item object with escaped/trimmed data and old id.
+		const item = new Item({
+			name: req.body.item_name,
+			description: req.body.item_description,
+			category: req.body.item_category,
+			price: req.body.item_price,
+			number_in_stock: req.body.item_num_in_stock,
+			_id: req.params.id,
+		});
+
+		if (!errors.isEmpty()) {
+			// There are errors. Render form again with sanitized values/error messages.
+			res.render("item_form", {
+				title: "Update Item",
+				categories: category_list,
+				item: item,
+			});
+			return;
+		} else {
+			await Item.findByIdAndUpdate(req.params.id, item).exec();
+			res.redirect(item.url);
+		}
+	}),
+];

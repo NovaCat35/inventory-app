@@ -98,3 +98,48 @@ exports.category_update_get = asyncHandler(async (req, res, next) => {
 });
 
 // Display Category update form on POST.
+exports.category_update_get = asyncHandler(async (req, res, next) => {
+	const category = await Category.findById(req.params.id).exec();
+
+	if (category === null) {
+		// No results.
+		const err = new Error("Category not found");
+		err.status = 404;
+		return next(err);
+	}
+	res.render("category_form", {
+		title: "Update Category",
+		category: category,
+	});
+});
+
+// Handle POST request from category form
+exports.category_update_post = [
+	// Validate and sanitize fields.
+	body("category_name", "Invalid name").trim().notEmpty().escape(),
+	body("category_description", "Invalid description").trim().isLength({ min: 10 }).escape(),
+
+	asyncHandler(async (req,res,next) => {
+		const errors = validationResult(req);
+		
+		// Create a category object with escaped/trimmed data and old id.
+		const category = new Category({
+			name: req.body.category_name,
+			description: req.body.category_description,
+			_id: req.params.id, // This is required, or a new ID will be assigned!
+		})
+
+		if(!errors.isEmpty()) {
+			// There are errors. Render form again with sanitized values/error messages.
+			res.render('category_form', {
+				title: "Update Category",
+				category: category,
+				errors: errors.array(),
+			})
+			return;
+		} else {
+			await Category.findByIdAndUpdate(req.params.id, category).exec();
+			res.redirect(category.url);
+		}
+	})
+]

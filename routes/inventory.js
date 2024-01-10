@@ -22,6 +22,9 @@ router.post("/categories/create", category_controller.category_create_post);
 // GET request for updating category
 router.get("/categories/:id/update", category_controller.category_update_get);
 
+// POST request for updating category
+router.post("/categories/:id/update", category_controller.category_update_post);
+
 // GET request for one category. (~ NOTE: you must put this last so the url doesn't confuse regular /url with :id !!!!!!)
 router.get("/categories/:id", category_controller.category_detail);
 
@@ -37,6 +40,9 @@ router.post("/items/create", item_controller.item_create_post);
 
 // GET request for updating item
 router.get("/items/:id/update", item_controller.item_update_get);
+
+// POST request for updating item
+router.post("/items/:id/update", item_controller.item_update_post);
 
 // GET request for one item. (~ NOTE: you must put this last so the url doesn't confuse regular /url with :id !!!!!!)
 router.get("/items/:id", item_controller.item_detail);
