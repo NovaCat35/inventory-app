@@ -21,9 +21,10 @@ npm install dotenv --save
 npm install mongoose
 npm install express-async-handler
 npm install express-validator
-npm install luxon
 npm install node-sass-middleware --save
 npm install express sass
+npm install --save multer
+npm install luxon <UNUSED, this is for future reference for date library>
 ```
 
 > Reminder to check app.js for all added changes 

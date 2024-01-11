@@ -15,13 +15,28 @@
       </p>
       
       <hr>
-      <h2>Status</h2>
-      <dl>
-        <dt>Total Categories</dt>
-        <dd><%= categories.length %></dd>
-        <dt>Number of Items</dt>
-        <dd><%= items.length %></dd>
-      </dl>
+      <div class="status-container">
+        <div class="status-info">
+          <h2>Status</h2>
+          <dl>
+            <dt>Total Categories</dt>
+            <dd><%= categories.length %></dd>
+            <dt>Number of Items</dt>
+            <dd><%= items.length %></dd>
+          </dl>
+        </div>
+        <img id='internet-gif' src="/images/internet.gif" alt="internet gif">
+      </div>
+      <script>
+        // Use JavaScript to hide the internet-gif after 2.5 seconds
+        document.addEventListener('DOMContentLoaded', function () {
+          const internetGif = document.getElementById('internet-gif');
+          
+          setTimeout(function () {
+            internetGif.style.display = 'none';
+          }, 2500);
+        });
+      </script>
     </main>
   </body>
 </html>
