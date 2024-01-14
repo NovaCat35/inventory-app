@@ -5,7 +5,7 @@
    <%- include('templates/navbar') %>
    <main>
       <h1><%= title %></h1>
-      <form method='post' action="">
+      <form method='post' action="" enctype="multipart/form-data">
          <div class="form-group">
             <label for="item_name">Item Name *</label>
             <input type="text" name="item_name" id="item_name" placeholder="Moomin Padlock" value="<%= (typeof item === "undefined" ? '' : item.name) %>" required>
@@ -25,6 +25,10 @@
                   </option>
                <% }) %>
             </select>
+         </div>
+         <div class="form-group">
+            <label for="uploaded_file">Upload Image</label>
+            <input type="file" name="uploaded_file" id="uploaded_file" accept="image/*">
          </div>
          <div class="form-group">
             <label for="item_price">Price ($USD) *</label>

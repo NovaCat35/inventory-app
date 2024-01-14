@@ -57,6 +57,7 @@ exports.item_create_post = [
 			category: req.body.item_category,
 			price: req.body.item_price,
 			number_in_stock: req.body.item_num_in_stock,
+			image: req.file ? req.file.filename : null, 
 		});
 
 		if (!errors.isEmpty()) {
@@ -111,6 +112,7 @@ exports.item_update_post = [
 			category: req.body.item_category,
 			price: req.body.item_price,
 			number_in_stock: req.body.item_num_in_stock,
+			image: req.file ? req.file.filename : null, 
 			_id: req.params.id,
 		});
 

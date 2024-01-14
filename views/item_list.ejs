@@ -11,12 +11,17 @@
       <div class="item-list-container">
          <% item_list.forEach(item => { %>
             <div class="item-container">
-               <h2 class="item-name"><a href=<%= item.url %>><%= item.name %></a></h2>
-               <p><a href=<%= item.category.url %>><%= item.category.name %></a></p>
-               <p>$<%= item.price %></p>
-               <% if (item.number_in_stock <= 20) { %>
-                  <p class="num-in-stock-alert">Only <%= item.number_in_stock%> left in stock</p>
+               <% if(item.image) { %>
+                  <img id="item-image" src="/uploads/<%= item.image %>" alt="Item Image">
                <% } %>
+               <div class="info-container">
+                  <h2 class="item-name"><a href=<%= item.url %>><%= item.name %></a></h2>
+                  <p><a href=<%= item.category.url %>><%= item.category.name %></a></p>
+                  <p>$<%= item.price %></p>
+                  <% if (item.number_in_stock <= 20) { %>
+                     <p class="num-in-stock-alert">Only <%= item.number_in_stock%> left in stock</p>
+                  <% } %>
+               </div>
             </div>
          <% }); %>
       </div>

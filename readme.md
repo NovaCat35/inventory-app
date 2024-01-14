@@ -1,12 +1,16 @@
-# Inventory Application
-A inventory app to keep track of desired wish list [Work in progress...]
+# The Inventory Store 
+Welcome to my inventory app! This project is to mainly enforce and showcase what I learned so far to create dynamic site operations for adding, updating, and keeping track of objects in database. 
+
+[Work in progress...] 
 
 # Features 🎯
+- ALL CRUD operations for uploading categories and items 
+- Ability to upload images
 
 ## Tools and Tech 🛠️
-- Node.js, Express.js, SCSS
+- Node.js, Express.js, SCSS, MongoDB, EJS
 
-## Challenges
+## Challenges 🔥
 Running into 404 and 500 pages sometimes as I change the routes and some code as more requirements popped up as I continue to handle get and post forms. The tough part is managing error occurrences in routes, controllers, and views.
 
 ## --- EXPRESS INSTALLATION 🚂 ---

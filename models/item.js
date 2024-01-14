@@ -7,6 +7,7 @@ const ItemSchema = Schema({
 	name: { type: String, required: true, minLength: 2 },
 	description: { type: String, required: true, maxLength: 300 },
 	category: {type: Schema.Types.ObjectId, ref: "Category", required: true },
+	image: { type: String, default: 'bongo-cat.jpeg' }, 
 	price: { type: Number, required: true },
 	number_in_stock: Number,
 });

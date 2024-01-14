@@ -1,10 +1,24 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
+const path = require("path");
 
 // Require controller modules.
 const category_controller = require("../controllers/categoryController");
 const item_controller = require("../controllers/itemController");
 
+// DiskStorage for images
+const storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+		cb(null, "public/uploads");  
+	},
+	filename: function (req, file, cb) {
+		//  const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+		//  cb(null, file.fieldname + '-' + uniqueSuffix)
+		cb(null, Date.now() + file.originalname);
+	},
+});
+const upload = multer({ storage: storage });
 
 /** CATEGORY ROUTES **/
 // GET home page.
@@ -29,11 +43,10 @@ router.post("/categories/:id/update", category_controller.category_update_post);
 router.get("/categories/:id/delete", category_controller.category_delete_get);
 
 // POST request for deleting category.
-router.post("/categories/:id/delete", category_controller.category_delete_post)
+router.post("/categories/:id/delete", category_controller.category_delete_post);
 
 // GET request for one category. (~ NOTE: you must put this last so the url doesn't confuse regular /url with :id !!!!!!)
 router.get("/categories/:id", category_controller.category_detail);
-
 
 /** ITEM ROUTES **/
 // GET request for item list.
@@ -43,13 +56,13 @@ router.get("/items", item_controller.item_list);
 router.get("/items/create", item_controller.item_create_get);
 
 // POST request for creating item
-router.post("/items/create", item_controller.item_create_post);
+router.post("/items/create", upload.single("uploaded_file"), item_controller.item_create_post);
 
 // GET request for updating item
 router.get("/items/:id/update", item_controller.item_update_get);
 
 // POST request for updating item
-router.post("/items/:id/update", item_controller.item_update_post);
+router.post("/items/:id/update", upload.single("uploaded_file"), item_controller.item_update_post);
 
 // GET request for deleting item.
 router.get("/items/:id/delete", item_controller.item_delete_get);
