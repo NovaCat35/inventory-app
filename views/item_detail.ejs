@@ -3,19 +3,31 @@
 <%- include('templates/head') %>
 <body>
    <%- include('templates/navbar') %>
-   <main>
-      <div class="item_detail_header">
+   <main class="main-detail-container">
+      <div class="item-img-container">
+         <img id="item-image small" src="/uploads/<%= item.image %>" alt="Item Image">
+      </div>
+      <div class="info-container">
          <div class="header-container">
             <h1 class="name"><%= item.name %></h1>
             <a href="<%= item.url %>/update"><img class="edit-icon" src="/images/edit-icon.svg" alt="edit-icon"></a>
             <a href="<%= item.url %>/delete"><img class="delete-icon" src="/images/delete-icon.svg" alt="delete-icon"></a>
          </div>
+         <hr>
          <p class="description"><%= item.description %></p>
+         <p><a href=<%= item.category.url %>><%= item.category.name %></a></p>
+         <p>$<%= item.price %></p>
+         <p class="<%= item.number_in_stock <= 20 ? 'num-in-stock-alert' : '' %>">Number in stock: <%= item.number_in_stock %></p>
       </div>
-      <hr>
-      <p><a href=<%= item.category.url %>><%= item.category.name %></a></p>
-      <p>$<%= item.price %></p>
-      <p class="<%= item.number_in_stock <= 20 ? 'num-in-stock-alert' : '' %>">Number in stock: <%= item.number_in_stock %></p>
+      <div class="secret-img1">
+         <p>
+            &nbsp;∧,,,∧<br>
+            (• ⩊ •)<br>
+            |￣U U￣￣￣￣￣￣￣￣￣|<br>
+            |&nbsp;&nbsp;&nbsp;&nbsp;(Shift -1: Fohnjb)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+            ￣￣￣￣￣￣￣￣￣￣￣￣
+          </p>
+      </div>
    </main>
 </body>
 </html>

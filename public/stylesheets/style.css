@@ -20,6 +20,22 @@ a:hover {
   cursor: url("/images/hand-pointer.svg"), pointer;
 }
 
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+
+p.description {
+  word-break: break-all;
+}
+
+.hidden {
+  color: white;
+}
+
 h1 {
   color: rgb(8, 8, 182);
   font-family: "Pixelify Sans", sans-serif;
@@ -66,13 +82,24 @@ nav ul {
 
 .item-list-container {
   display: grid;
-  grid-template: 1fr/repeat(auto-fit, minmax(250px, 1fr));
+  grid-template: 1fr/repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
 }
 .item-list-container .item-container {
+  box-shadow: 0px 0px 5px rgb(87, 128, 170);
   background-color: rgb(215, 228, 242);
-  padding: 30px;
+  border-radius: 10px;
   position: relative;
+}
+.item-list-container .item-container img#item-image {
+  border-radius: 10px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom: none;
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  object-position: center;
 }
 .item-list-container .item-container .item-name a {
   color: black;
@@ -80,6 +107,11 @@ nav ul {
 .item-list-container .item-container .num-in-stock-alert {
   position: absolute;
   bottom: 0;
+}
+.item-list-container .item-container .info-container {
+  background-color: rgb(215, 228, 242);
+  padding: 20px 10px 30px;
+  border-radius: 10px;
 }
 
 .num-in-stock-alert,
@@ -140,17 +172,27 @@ img#github-icon:hover {
   transform: rotate(360deg);
 }
 
-img#type-cat {
-  user-select: none;
+img.type-cat {
   width: 150px;
   position: absolute;
   bottom: 20px;
   right: 50px;
 }
+img.type-cat#food-cats {
+  width: 200px;
+}
+img.type-cat#magic-cat {
+  width: 170px;
+}
 
-img#item-image {
-  border-radius: 10px;
-  width: 100%;
+img#item-image\ small {
+  width: 30vw;
+}
+
+.secret-img1 {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
 }
 
 .github-link {
@@ -165,6 +207,23 @@ img#item-image {
 .status-container h2 {
   font-size: 1.3rem;
   color: rgb(8, 8, 182);
+}
+
+.main-detail-container {
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+.main-detail-container .info-container {
+  margin-right: 40px;
+}
+
+.magic-container {
+  position: relative;
+  display: flex;
+}
+.magic-container img {
+  position: static;
 }
 
 /*# sourceMappingURL=style.css.map */

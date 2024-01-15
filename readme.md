@@ -1,11 +1,15 @@
-# The Inventory Store 
+# The Modern 80s Inventory Store 
 Welcome to my inventory app! This project is to mainly enforce and showcase what I learned so far to create dynamic site operations for adding, updating, and keeping track of objects in database. 
+
+PS: To protect against destructive actions, there is a password for updating and deleting objects. You ain't getting that from me, but perhaps the answer lies deep within this web.
+PRO-TIP: Did you know you can click and drag to highlight elements on the web? Cool stuff!
 
 [Work in progress...] 
 
 # Features 🎯
 - ALL CRUD operations for uploading categories and items 
-- Ability to upload images
+- Ability to upload images (multer library)
+- Cats...
 
 ## Tools and Tech 🛠️
 - Node.js, Express.js, SCSS, MongoDB, EJS

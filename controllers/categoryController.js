@@ -24,7 +24,7 @@ exports.category_list = asyncHandler(async (req, res, next) => {
 
 // Display details of items from a specific Categories.
 exports.category_detail = asyncHandler(async (req, res, next) => {
-	const [category, allItemsInCategory] = await Promise.all([Category.findById(req.params.id).exec(), Item.find({ category: req.params.id }, "name price number_in_stock").exec()]);
+	const [category, allItemsInCategory] = await Promise.all([Category.findById(req.params.id).exec(), Item.find({ category: req.params.id }, "name price image number_in_stock").exec()]);
 
 	if (category == null) {
 		// No results.

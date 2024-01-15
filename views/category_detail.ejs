@@ -13,16 +13,22 @@
          <p class="description"><%= category.description %></p>
       </div>
       <hr>
+      <br>
       <% if(category_items.length !== 0) { %>
-         <% category_items.forEach(item => { %>
-            <div class="item-container">
-               <h2 class="item-name"><a href=<%= item.url %>><%= item.name %></a></h2>
-               <p>$<%= item.price %></p>
-               <% if (item.number_in_stock <= 20) { %>
-                  <p class="num-in-stock-alert">Only <%= item.number_in_stock%> left in stock</p>
-               <% } %>
-            </div>
-         <% }) %>
+         <div class="item-list-container category-detail">
+            <% category_items.forEach(item => { %>
+               <div class="item-container">
+                     <img id="item-image" src="/uploads/<%= item.image %>" alt="Item Image">
+                  <div class="info-container">
+                     <h2 class="item-name"><a href=<%= item.url %>><%= item.name %></a></h2>
+                     <p>$<%= item.price %></p>
+                     <% if (item.number_in_stock <= 20) { %>
+                        <p class="num-in-stock-alert">Only <%= item.number_in_stock%> left in stock</p>
+                     <% } %>
+                  </div>
+               </div>
+            <% }) %>
+         </div>
       <% } else { %>
          <p class="empty-alert">There are currently no items in this category.</p>
       <% } %>

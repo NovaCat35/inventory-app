@@ -23,8 +23,11 @@
             <dd><%= categories.length %></dd>
             <dt>Number of Items</dt>
             <dd><%= items.length %></dd>
+            <p class="hidden">Ignore the "-" during final input.</p>
+            <p class="hidden">A=1, B=2, C=3, ..., Z=26 &#x2934;</p>
           </dl>
         </div>
+       
         <img id='internet-gif' src="/images/internet.gif" alt="internet gif">
       </div>
       <script>
@@ -34,7 +37,7 @@
           
           setTimeout(function () {
             internetGif.style.display = 'none';
-          }, 2500);
+          }, 5300);
         });
       </script>
     </main>

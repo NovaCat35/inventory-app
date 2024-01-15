@@ -2,6 +2,7 @@ const Category = require("../models/category");
 const Item = require("../models/item");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
+const fs = require("fs");
 
 // Display list of all Item.
 exports.item_list = asyncHandler(async (req, res, next) => {
@@ -57,7 +58,7 @@ exports.item_create_post = [
 			category: req.body.item_category,
 			price: req.body.item_price,
 			number_in_stock: req.body.item_num_in_stock,
-			image: req.file ? req.file.filename : null, 
+			image: req.file ? req.file.filename : 'bongo-cat.jpeg',
 		});
 
 		if (!errors.isEmpty()) {
@@ -112,7 +113,7 @@ exports.item_update_post = [
 			category: req.body.item_category,
 			price: req.body.item_price,
 			number_in_stock: req.body.item_num_in_stock,
-			image: req.file ? req.file.filename : null, 
+			image: req.file ? req.file.filename : 'bongo-cat.jpeg',
 			_id: req.params.id,
 		});
 
@@ -126,6 +127,16 @@ exports.item_update_post = [
 			});
 			return;
 		} else {
+			// Remove the image from the public/upload folder
+			const currItem = await Item.findById(req.params.id).exec();
+			if (currItem.image !== "bongo-cat.jpeg") {
+				fs.unlink(`public/uploads/${currItem.image}`, (err) => {
+					if (err) {
+						console.error(`Error deleting image file: ${err}`);
+					}
+				});
+			}
+			// Update the item object in the database
 			await Item.findByIdAndUpdate(req.params.id, item).exec();
 			res.redirect(item.url);
 		}
@@ -149,6 +160,15 @@ exports.item_delete_get = asyncHandler(async (req, res, next) => {
 
 // Handle Item Delete on POST.
 exports.item_delete_post = asyncHandler(async (req, res, next) => {
+	// Remove the image from the public/upload folder
+	const currItem = await Item.findById(req.params.id).exec();
+	if (currItem.image !== "bongo-cat.jpeg") {
+		fs.unlink(`public/uploads/${currItem.image}`, (err) => {
+			if (err) {
+				console.error(`Error deleting image file: ${err}`);
+			}
+		});
+	}
 	await Item.findByIdAndDelete(req.params.id);
 	res.redirect("/inventory/items");
 });
