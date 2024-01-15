@@ -52,7 +52,7 @@ exports.item_create_post = [
 
 	asyncHandler(async (req, res, next) => {
 		const errors = validationResult(req);
-		let formattedPrice = parseFloat(req.body.item_price).toFixed(2); 
+		let formattedPrice = parseFloat(req.body.item_price).toFixed(2);
 
 		const item = new Item({
 			name: req.body.item_name,
@@ -92,6 +92,7 @@ exports.item_update_get = asyncHandler(async (req, res, next) => {
 		title: "Update Item",
 		categories: category_list,
 		item: item,
+		password_required: true,
 	});
 });
 
@@ -107,8 +108,8 @@ exports.item_update_post = [
 	asyncHandler(async (req, res, next) => {
 		const errors = validationResult(req);
 		const category_list = await Category.find({}).exec();
-		let formattedPrice = parseFloat(req.body.item_price).toFixed(2); 
-		console.log(`Formatted price: ${formattedPrice}`)
+		let formattedPrice = parseFloat(req.body.item_price).toFixed(2);
+		console.log(`Formatted price: ${formattedPrice}`);
 		// Create a item object with escaped/trimmed data and old id.
 		const item = new Item({
 			name: req.body.item_name,
@@ -126,22 +127,34 @@ exports.item_update_post = [
 				title: "Update Item",
 				categories: category_list,
 				item: item,
+				password_required: true,
 				errors: errors.array(),
 			});
 			return;
 		} else {
-			// Remove the image from the public/upload folder
-			const currItem = await Item.findById(req.params.id).exec();
-			if (currItem.image !== "bongo-cat.jpeg") {
-				fs.unlink(`public/uploads/${currItem.image}`, (err) => {
-					if (err) {
-						console.error(`Error deleting image file: ${err}`);
-					}
+			if (req.body.password !== process.env.Secret_PASS) {
+				// Password is not correct. Render form again.
+				res.render("item_form", {
+					title: "Update Item",
+					categories: category_list,
+					item: item,
+					password_required: true,
+					password_error: "ACCESS DENIED, TRY AGAIN!",
 				});
+			} else {
+				// Remove the image from the public/upload folder
+				const currItem = await Item.findById(req.params.id).exec();
+				if (currItem.image !== "bongo-cat.jpeg") {
+					fs.unlink(`public/uploads/${currItem.image}`, (err) => {
+						if (err) {
+							console.error(`Error deleting image file: ${err}`);
+						}
+					});
+				}
+				// Update the item object in the database
+				await Item.findByIdAndUpdate(req.params.id, item).exec();
+				res.redirect(item.url);
 			}
-			// Update the item object in the database
-			await Item.findByIdAndUpdate(req.params.id, item).exec();
-			res.redirect(item.url);
 		}
 	}),
 ];
@@ -183,7 +196,7 @@ exports.item_delete_post = [
 				res.render("item_delete", {
 					title: "Delete Item",
 					item: item,
-					password_error: 'ACCESS DENIED, TRY AGAIN!',
+					password_error: "ACCESS DENIED, TRY AGAIN!",
 				});
 			} else {
 				// Remove the image from the public/upload folder

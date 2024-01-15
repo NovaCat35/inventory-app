@@ -22,14 +22,14 @@
 				<div class="form-group" id="password-container">
 					<label for="password">Password *</label>
 					<div class="password-container">
-						<input type="password" name="password" id="password" placeholder="4-15-7Fohnjb#1" required />
+						<input type="password" name="password" id="password" placeholder="4-15*7Fohnjb#1" required />
 						<img class="eye-icon" src="/images/eye.svg" alt="password eye-icon" />
 					</div>
 					<p class="hint">Hint: psst...cats love mice! Why not try using your mouse?</p>
 					<% if(typeof password_error !== "undefined") { %>
-						<p class="alert"><%= password_error %></p>
+						<p class="error-msg"><%= password_error %></p>
 					<% } %>
-					<p class="hint-hidden hidden">Hint1: Replace #1 with total number of different cat typed-emojis.</p>
+					<p class="hint-hidden hidden">Hint1: Replace #1 with total number of <u>different</u> cat typed-emojis.</p>
 				</div>
 				<button style="align-self: self-start" type="submit">Confirm</button>
 			</form>
@@ -43,19 +43,6 @@
 				</div>
 			</div>
 		</main>
-		<script>
-			const eyeIcon = document.querySelector(".eye-icon");
-			const passInput = document.getElementById("password");
-			eyeIcon.addEventListener("click", () => {
-				// Unhide password and display close-eye icon
-				if (passInput.type === "password") {
-					passInput.type = "text";
-					eyeIcon.src = "/images/eye-off.svg";
-				} else {
-					passInput.type = "password";
-					eyeIcon.src = "/images/eye.svg";
-				}
-			});
-		</script>
+		<%- include('templates/script') %>
 	</body>
 </html>

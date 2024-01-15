@@ -234,6 +234,17 @@ img#item-image\ small {
   position: absolute;
   bottom: 10px;
   right: 20px;
+  cursor: pointer;
+}
+.secret-img1 .hidden {
+  display: none;
+}
+.secret-img1:hover .comment {
+  display: none;
+}
+.secret-img1:hover .hidden {
+  color: black;
+  display: inline;
 }
 
 .github-link {

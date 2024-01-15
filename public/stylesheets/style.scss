@@ -242,6 +242,17 @@ img#item-image\ small {
 	position: absolute;
 	bottom: 10px;
 	right: 20px;
+	cursor: pointer;
+	.hidden {
+		display: none;
+	}
+	&:hover .comment {
+		display: none;
+	}
+	&:hover .hidden {
+		color: black;
+		display: inline;
+	}
 }
 .github-link {
 	position: absolute;

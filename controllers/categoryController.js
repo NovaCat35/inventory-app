@@ -94,22 +94,7 @@ exports.category_update_get = asyncHandler(async (req, res, next) => {
 	res.render("category_form", {
 		title: "Update Category",
 		category: category,
-	});
-});
-
-// Display Category update form on POST.
-exports.category_update_get = asyncHandler(async (req, res, next) => {
-	const category = await Category.findById(req.params.id).exec();
-
-	if (category === null) {
-		// No results.
-		const err = new Error("Category not found");
-		err.status = 404;
-		return next(err);
-	}
-	res.render("category_form", {
-		title: "Update Category",
-		category: category,
+		password_required: true,
 	});
 });
 
@@ -134,12 +119,23 @@ exports.category_update_post = [
 			res.render("category_form", {
 				title: "Update Category",
 				category: category,
+				password_required: true,
 				errors: errors.array(),
 			});
 			return;
 		} else {
-			await Category.findByIdAndUpdate(req.params.id, category).exec();
-			res.redirect(category.url);
+			if (req.body.password !== process.env.Secret_PASS) {
+				// Password is not correct. Render form again.
+				res.render("category_form", {
+					title: "Update Category",
+					category: category,
+					password_required: true,
+					password_error: "ACCESS DENIED, TRY AGAIN!",
+				});
+			} else {
+				await Category.findByIdAndUpdate(req.params.id, category).exec();
+				res.redirect(category.url);
+			}
 		}
 	}),
 ];

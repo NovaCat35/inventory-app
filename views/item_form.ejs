@@ -38,6 +38,18 @@
             <label for="item_num_in_stock">Number in Stock *</label>
             <input type="number" name="item_num_in_stock" id="item_num_in_stock" placeholder="50" value="<%= (typeof item === "undefined" ? '' : item.number_in_stock) %>" required>
          </div>
+         <% if(typeof password_required !== 'undefined') { %>
+            <div class="form-group">
+               <label for="password">Password *</label>
+               <div class="password-container">
+                  <input type="password" name="password" id="password" placeholder="4-15*7Fohnjb#1" required />
+                  <img class="eye-icon" src="/images/eye.svg" alt="password eye-icon" />
+               </div>
+            </div>
+            <% if(typeof password_error !== "undefined") { %>
+               <p class="error-msg" style="margin: 0;"><%= password_error %></p>
+            <% } %>
+         <% } %>
          <button type="submit">Submit</button>
       </form>
       
@@ -50,5 +62,6 @@
          </ul>
       <% } %>
    </main>
+   <%- include('templates/script') %>
 </body>
 </html>

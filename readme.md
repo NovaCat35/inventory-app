@@ -1,9 +1,7 @@
-# The Modern 90s Inventory Web 
+# The Inventory Cat Cafe
 Welcome to my inventory website! This project is to mainly enforce and showcase what I learned so far to create dynamic site operations for adding, updating, and keeping track of objects in database. 
 
 Note: To protect against destructive actions, there is a password for updating and deleting objects. You ain't getting that from me, but perhaps the answer lies deep within this web.
-
-💡Pro-Tip: Did you know you can click and drag to highlight elements on the web? Cool stuff!
 
 [Work in progress...] 
 

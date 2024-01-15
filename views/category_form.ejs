@@ -15,7 +15,18 @@
 							<label for="category_description">Description *</label>
 							<textarea name="category_description" id="category_description" rows="4" cols="50" minLength="10" maxLength="200" placeholder="Discover a collection of essential and stylish items designed to enhance your home's security while adding a touch of decor. Explore functional and aesthetic solutions for a safe and inviting living space." required><%= (typeof category === "undefined" ? '' : category.description) %></textarea>
 						</div>
-			
+			         <% if(typeof password_required !== 'undefined') { %>
+							<div class="form-group">
+								<label for="password">Password *</label>
+								<div class="password-container">
+									<input type="password" name="password" id="password" placeholder="4-15*7Fohnjb#1" required />
+									<img class="eye-icon" src="/images/eye.svg" alt="password eye-icon" />
+								</div>
+							</div>
+							<% if(typeof password_error !== "undefined") { %>
+								<p class="error-msg" style="margin: 0;"><%= password_error %></p>
+							<% } %>
+						<% } %>
 						<button type="submit">Submit</button>
 					</form>
 			<% if (typeof errors !== "undefined" && errors.length > 0) { %>
@@ -27,5 +38,6 @@
 			<% } %>
 			<img class="type-cat" id="food-cats" src="/images/type-cat-food.png" alt="cat image">
 		</main>
+		<%- include('templates/script') %>
 	</body>
 </html>
