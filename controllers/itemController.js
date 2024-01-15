@@ -3,6 +3,7 @@ const Item = require("../models/item");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const fs = require("fs");
+require("dotenv").config();
 
 // Display list of all Item.
 exports.item_list = asyncHandler(async (req, res, next) => {
@@ -58,7 +59,7 @@ exports.item_create_post = [
 			category: req.body.item_category,
 			price: req.body.item_price,
 			number_in_stock: req.body.item_num_in_stock,
-			image: req.file ? req.file.filename : 'bongo-cat.jpeg',
+			image: req.file ? req.file.filename : "bongo-cat.jpeg",
 		});
 
 		if (!errors.isEmpty()) {
@@ -113,7 +114,7 @@ exports.item_update_post = [
 			category: req.body.item_category,
 			price: req.body.item_price,
 			number_in_stock: req.body.item_num_in_stock,
-			image: req.file ? req.file.filename : 'bongo-cat.jpeg',
+			image: req.file ? req.file.filename : "bongo-cat.jpeg",
 			_id: req.params.id,
 		});
 
@@ -159,16 +160,42 @@ exports.item_delete_get = asyncHandler(async (req, res, next) => {
 });
 
 // Handle Item Delete on POST.
-exports.item_delete_post = asyncHandler(async (req, res, next) => {
-	// Remove the image from the public/upload folder
-	const currItem = await Item.findById(req.params.id).exec();
-	if (currItem.image !== "bongo-cat.jpeg") {
-		fs.unlink(`public/uploads/${currItem.image}`, (err) => {
-			if (err) {
-				console.error(`Error deleting image file: ${err}`);
+exports.item_delete_post = [
+	// Validate and sanitize fields.
+	body("password", "Password is Required").trim().notEmpty().escape(),
+
+	asyncHandler(async (req, res, next) => {
+		const errors = validationResult(req);
+		const item = await Item.findById(req.params.id, "name").exec();
+
+		if (!errors.isEmpty()) {
+			// There are errors. Render form again with sanitized values/error messages.
+			res.render("item_delete", {
+				title: "Delete Item",
+				item: item,
+				errors: errors.array(),
+			});
+		} else {
+			if (req.body.password !== process.env.Secret_PASS) {
+				// Password is not correct. Render form again.
+				res.render("item_delete", {
+					title: "Delete Item",
+					item: item,
+					password_error: 'ACCESS DENIED, TRY AGAIN!',
+				});
+			} else {
+				// Remove the image from the public/upload folder
+				const currItem = await Item.findById(req.params.id).exec();
+				if (currItem.image !== "bongo-cat.jpeg") {
+					fs.unlink(`public/uploads/${currItem.image}`, (err) => {
+						if (err) {
+							console.error(`Error deleting image file: ${err}`);
+						}
+					});
+				}
+				await Item.findByIdAndDelete(req.params.id);
+				res.redirect("/inventory/items");
 			}
-		});
-	}
-	await Item.findByIdAndDelete(req.params.id);
-	res.redirect("/inventory/items");
-});
+		}
+	}),
+];

@@ -162,11 +162,14 @@ form {
 	.form-group {
 		display: flex;
 		flex-direction: column;
+		&#password-container {
+			align-self: flex-start;
+		}
 	}
 	input, select, textarea {
 		margin-top: 5px;
 		padding: 5px;
-		width: 80vw /* Adjust the width as needed */
+		width: 80vw 
   }
   button {
 	margin-top: 10px;
@@ -239,6 +242,17 @@ img#item-image\ small {
 	margin: 0;
 	right: 15px;
 }
+// Password container
+.password-container {
+	position: relative;
+	img.eye-icon{
+		cursor: pointer;
+		position: absolute;
+		top: 8px;
+		right: 10px;
+		width: 25px;
+	}
+}
 
 // Home page Status Container
 .status-container {
@@ -267,4 +281,9 @@ img#item-image\ small {
 	img {
 		position: static;
 	}
+}
+.hint-hidden {
+	margin: 0;
+	margin-top: -10px;
+	margin-bottom: -25px;
 }

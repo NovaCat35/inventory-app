@@ -1,8 +1,9 @@
-# The Modern 80s Inventory Store 
-Welcome to my inventory app! This project is to mainly enforce and showcase what I learned so far to create dynamic site operations for adding, updating, and keeping track of objects in database. 
+# The Modern 90s Inventory Web 
+Welcome to my inventory website! This project is to mainly enforce and showcase what I learned so far to create dynamic site operations for adding, updating, and keeping track of objects in database. 
 
-PS: To protect against destructive actions, there is a password for updating and deleting objects. You ain't getting that from me, but perhaps the answer lies deep within this web.
-PRO-TIP: Did you know you can click and drag to highlight elements on the web? Cool stuff!
+Note: To protect against destructive actions, there is a password for updating and deleting objects. You ain't getting that from me, but perhaps the answer lies deep within this web.
+
+💡Pro-Tip: Did you know you can click and drag to highlight elements on the web? Cool stuff!
 
 [Work in progress...] 
 

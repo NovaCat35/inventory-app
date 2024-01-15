@@ -152,6 +152,9 @@ form .form-group {
   display: flex;
   flex-direction: column;
 }
+form .form-group#password-container {
+  align-self: flex-start;
+}
 form input, form select, form textarea {
   margin-top: 5px;
   padding: 5px;
@@ -233,6 +236,17 @@ img#item-image\ small {
   right: 15px;
 }
 
+.password-container {
+  position: relative;
+}
+.password-container img.eye-icon {
+  cursor: pointer;
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 25px;
+}
+
 .status-container {
   display: flex;
 }
@@ -256,6 +270,12 @@ img#item-image\ small {
 }
 .magic-container img {
   position: static;
+}
+
+.hint-hidden {
+  margin: 0;
+  margin-top: -10px;
+  margin-bottom: -25px;
 }
 
 /*# sourceMappingURL=style.css.map */
