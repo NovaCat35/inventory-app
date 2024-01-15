@@ -49,6 +49,26 @@ main {
   padding: 0 50px;
 }
 
+button {
+  background-color: #009688;
+  color: #fff;
+  padding: 10px 20px;
+  border: 2px solid #004d40;
+  border-radius: 5px;
+  font-family: "Courier New", monospace;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+button:hover {
+  background-color: #004d40;
+  color: #fff;
+}
+
 nav {
   font-family: "Pixelify Sans", sans-serif;
   display: flex;
@@ -124,12 +144,22 @@ nav ul {
 form {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
   margin: 20px 0;
 }
 form .form-group {
   display: flex;
   flex-direction: column;
+}
+form input, form select, form textarea {
+  margin-top: 5px;
+  padding: 5px;
+  width: 80vw;
+}
+form button {
+  margin-top: 10px;
+  width: 60vw;
 }
 
 .category_detail_header,
@@ -150,6 +180,8 @@ form .form-group {
 }
 
 .list {
+  font-family: "Courier New", monospace;
+  font-weight: 700;
   margin: 0;
   margin-bottom: 15px;
 }
