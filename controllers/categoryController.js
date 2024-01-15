@@ -155,19 +155,34 @@ exports.category_delete_get = asyncHandler(async (req, res, next) => {
 });
 
 // Handle Category Delete on POST.
-exports.category_delete_post = asyncHandler(async (req, res, next) => {
-	const [category, category_items] = await Promise.all([Category.findById(req.params.id, "name").exec(), Item.find({ category: req.params.id }).exec()]);
+exports.category_delete_post = [
+	// Validate and sanitize fields.
+	body("password", "Password is Required").trim().notEmpty().escape(),
 
-	// Category has items, rerender page showing items that needs to be deleted.
-	if (category_items.length > 0) {
-		res.render("category_delete", {
-			title: "Delete Category",
-			category: category,
-			items: category_items,
-		});
-	} else {
-		// Category has no items, delete the object.
-		await Category.findByIdAndDelete(req.params.id);
-		res.redirect("/inventory/categories");
-	}
-});
+	asyncHandler(async (req, res, next) => {
+		const [category, category_items] = await Promise.all([Category.findById(req.params.id, "name").exec(), Item.find({ category: req.params.id }).exec()]);
+
+		// Category has items, rerender page showing items that needs to be deleted.
+		if (category_items.length > 0) {
+			res.render("category_delete", {
+				title: "Delete Category",
+				category: category,
+				items: category_items,
+			});
+		} else {
+			if (req.body.password !== process.env.Secret_PASS) {
+				// Password is not correct. Render form again.
+				res.render("category_delete", {
+					title: "Delete Category",
+					category: category,
+					items: category_items,
+					password_error: "ACCESS DENIED, TRY AGAIN!",
+				});
+			} else {
+				// Category has no items, delete the object.
+				await Category.findByIdAndDelete(req.params.id);
+				res.redirect("/inventory/categories");
+			}
+		}
+	}),
+];

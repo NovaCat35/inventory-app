@@ -52,12 +52,13 @@ exports.item_create_post = [
 
 	asyncHandler(async (req, res, next) => {
 		const errors = validationResult(req);
+		let formattedPrice = parseFloat(req.body.item_price).toFixed(2); 
 
 		const item = new Item({
 			name: req.body.item_name,
 			description: req.body.item_description,
 			category: req.body.item_category,
-			price: req.body.item_price,
+			price: formattedPrice,
 			number_in_stock: req.body.item_num_in_stock,
 			image: req.file ? req.file.filename : "bongo-cat.jpeg",
 		});
@@ -106,13 +107,14 @@ exports.item_update_post = [
 	asyncHandler(async (req, res, next) => {
 		const errors = validationResult(req);
 		const category_list = await Category.find({}).exec();
-
+		let formattedPrice = parseFloat(req.body.item_price).toFixed(2); 
+		console.log(`Formatted price: ${formattedPrice}`)
 		// Create a item object with escaped/trimmed data and old id.
 		const item = new Item({
 			name: req.body.item_name,
 			description: req.body.item_description,
 			category: req.body.item_category,
-			price: req.body.item_price,
+			price: formattedPrice,
 			number_in_stock: req.body.item_num_in_stock,
 			image: req.file ? req.file.filename : "bongo-cat.jpeg",
 			_id: req.params.id,

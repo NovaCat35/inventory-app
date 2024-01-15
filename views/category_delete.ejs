@@ -18,7 +18,7 @@
 						</ul>
 			<% } else { %>
 			<p>Are you sure you want to delete?</p>
-			<form method="post" action="">
+			<form method="post" action="" autocomplete="off">
 				<div class="form-group" id="password-container">
 					<label for="password">Password *</label>
 					<div class="password-container">
@@ -26,6 +26,9 @@
 						<img class="eye-icon" src="/images/eye.svg" alt="password eye-icon" />
 					</div>
 					<p class="hint">Hint: psst...cats love mice! Why not try using your mouse?</p>
+					<% if(typeof password_error !== "undefined") { %>
+						<p class="alert"><%= password_error %></p>
+					<% } %>
 					<p class="hint-hidden hidden">Hint1: Replace #1 with total number of different cat typed-emojis.</p>
 				</div>
 				<button style="align-self: self-start" type="submit">Confirm</button>
@@ -36,6 +39,7 @@
 				<div id="magic-text" class="hidden">
 					<p>[x] Dog</p>
 					<p>✔ Cat</p>
+					<p>Hint2: Clue is in the placeholder.</p>
 				</div>
 			</div>
 		</main>
