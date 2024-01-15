@@ -1,23 +1,24 @@
-# The Inventory Cat Cafe
-Welcome to my inventory website! This project is to mainly enforce and showcase what I learned so far to create dynamic site operations for adding, updating, and keeping track of objects in database. 
+# My Inventory Cat Cafe
+Welcome to my inventory site! This project is created to showcase dynamic site operations for adding, updating, and keeping track of objects in database. Though initially I was just gonna make this pretty plain, I had fun creating the puzzle and mystery of the theme of mystery and early internet vibe. Did I mention there's cats involved?  
 
-Note: To protect against destructive actions, there is a password for updating and deleting objects. You ain't getting that from me, but perhaps the answer lies deep within this web.
+Note⚠️ To protect against destructive actions, there is a password for updating and deleting objects. It's no fun if I just tell you the password, but perhaps you can find the answer deep within this web.
 
-[Work in progress...] 
+Link: ☕️
 
+-----
 # Features 🎯
 - ALL CRUD operations for uploading categories and items 
 - Ability to upload images (multer library)
 - Cats...
 
-## Tools and Tech 🛠️
+## Tools and Tech 🔬
 - Node.js, Express.js, SCSS, MongoDB, EJS
 
 ## Challenges 🔥
-Running into 404 and 500 pages sometimes as I change the routes and some code as more requirements popped up as I continue to handle get and post forms. The tough part is managing error occurrences in routes, controllers, and views.
+Some of the earlier issues I ran into was dealing with 404 and 500 pages because I wasn't aware of key components of how routes, controllers, and ejs handle around some values and paths as I imagine. Though after the first breakthrough, everything else came more naturally. 
 
-## --- EXPRESS INSTALLATION 🚂 ---
-### DEVELOPMENT 
+## Installation Guide ⚙️
+### Development
 > Type in terminal the following : 
 ``` 
 express inventory-application --view=ejs --css=sass
@@ -36,7 +37,7 @@ npm install luxon <UNUSED, this is for future reference for date library>
 
 > Reminder to check app.js for all added changes 
 
-### PRODUCTION
+### Production
 > Type in terminal the following : 
 ```
 npm install compression
