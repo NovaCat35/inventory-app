@@ -1,21 +1,22 @@
 # My Inventory Cat Cafe
 Welcome to my inventory site! This project is created to showcase dynamic site operations for adding, updating, and keeping track of objects in database. Though initially I was just gonna make this pretty plain, I had fun creating the puzzle and mystery of the theme of mystery and early internet vibe. Did I mention there's cats involved?  
 
-Note⚠️ To protect against destructive actions, there is a password for updating and deleting objects. It's no fun if I just tell you the password, but perhaps you can find the answer deep within this web.
+⚠️ To protect against destructive actions, there is a password for updating and deleting objects. It's no fun if I just tell you the password, but perhaps you can find the answer deep within this web.
 
-Link: ☕️
+Link: https://inventory-cat-cafe.fly.dev 🐈 ☕️
 
 -----
 # Features 🎯
 - ALL CRUD operations for uploading categories and items 
-- Ability to upload images (multer library)
+- Ability to upload images
+- Safeguard for uploading/deleting objects
 - Cats...
 
 ## Tools and Tech 🔬
 - Node.js, Express.js, SCSS, MongoDB, EJS
 
 ## Challenges 🔥
-Some of the earlier issues I ran into was dealing with 404 and 500 pages because I wasn't aware of key components of how routes, controllers, and ejs handle around some values and paths as I imagine. Though after the first breakthrough, everything else came more naturally. 
+One of the earlier issues I ran into was dealing with 404 and 500 pages because I wasn't aware of key components of how routes, controllers, and EJS handle some values and paths as I imagined. Through trial and error with testing out different routes and configurations using libraries, I managed to get everything working. Another issue I tackled was originally the changes I made to my model after incorporating images and other changes for forms. I believe I took some valuable lessons in using models and what is good and bad habits for showcasing forms. Pretty much for other problems, after the first breakthrough, everything else came more naturally. 
 
 ## Installation Guide ⚙️
 ### Development
