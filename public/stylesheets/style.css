@@ -242,7 +242,7 @@ img#item-image\ small {
 .secret-img1:hover .comment {
   display: none;
 }
-.secret-img1:hover .hidden {
+.secret-img1:hover .hidden, .secret-img1:active .hidden {
   color: black;
   display: inline;
 }

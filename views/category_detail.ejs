@@ -18,8 +18,11 @@
          <div class="item-list-container category-detail">
             <% category_items.forEach(item => { %>
                <div class="item-container">
-                     <img id="item-image" src="/uploads/<%= item.image %>" alt="Item Image">
-                  <div class="info-container">
+                     <% if(item.profile_img) { %>
+                        <img id="item-image" src="<%= item.profile_img %>" alt="Item Image">
+                     <% } else { %>
+                        <img id="item-image" src="/images/bongo-cat.jpeg" alt="Item Image">
+                     <%  } %>                  <div class="info-container">
                      <h2 class="item-name"><a href=<%= item.url %>><%= item.name %></a></h2>
                      <p>$<%= item.price %></p>
                      <% if (item.number_in_stock <= 20) { %>

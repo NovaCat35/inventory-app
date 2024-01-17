@@ -5,7 +5,11 @@
    <%- include('templates/navbar') %>
    <main class="main-detail-container">
       <div class="item-img-container">
-         <img id="item-image small" src="/uploads/<%= item.image %>" alt="Item Image">
+         <% if(item.profile_img) { %>
+            <img id="item-image small" src="<%= item.profile_img %>" alt="Item Image">
+         <% } else { %>
+            <img id="item-image small" src="/images/bongo-cat.jpeg" alt="Item Image">
+         <%  } %>
       </div>
       <div class="info-container">
          <div class="header-container">
@@ -24,7 +28,7 @@
             &nbsp;∧,,,∧<br>
             (• ⩊ •)<br>
             |￣U U￣￣￣￣￣￣￣￣￣|<br>
-            |&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">♫⋆｡♪˚Meow˚₊♬°.</span><span class="hidden">(Shift -1: Fohnjb)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+            |&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">&nbsp;♫⋆｡♪˚Meow˚₊♬°.&nbsp;&nbsp;</span><span class="hidden">(Shift -1: Fojhnb) ♫</span>&nbsp;&nbsp;&nbsp;|<br>
             ￣￣￣￣￣￣￣￣￣￣￣￣
           </p>
       </div>

@@ -3,6 +3,7 @@ const Item = require("../models/item");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const fs = require("fs");
+const cloudinary = require("../configs/cloudinaryConfig");
 require("dotenv").config();
 
 // Display list of all Item.
@@ -51,29 +52,41 @@ exports.item_create_post = [
 	body("item_num_in_stock").trim().notEmpty().withMessage("Number in stock is required").isInt({ min: 1 }).withMessage("Number in stock must be greater than zero").escape(),
 
 	asyncHandler(async (req, res, next) => {
-		const errors = validationResult(req);
-		let formattedPrice = parseFloat(req.body.item_price).toFixed(2);
+		try {
+			const errors = validationResult(req);
+			let formattedPrice = parseFloat(req.body.item_price).toFixed(2);
+			// Upload image to cloudinary
+			const result = await cloudinary.uploader.upload(req.file.path);
 
-		const item = new Item({
-			name: req.body.item_name,
-			description: req.body.item_description,
-			category: req.body.item_category,
-			price: formattedPrice,
-			number_in_stock: req.body.item_num_in_stock,
-			image: req.file ? req.file.filename : "bongo-cat.jpeg",
-		});
-
-		if (!errors.isEmpty()) {
-			const category_list = await Category.find({}).exec();
-			res.render("item_form", {
-				title: "Create Item",
-				item: item,
-				categories: category_list,
-				errors: errors.array(),
+			const item = new Item({
+				name: req.body.item_name,
+				description: req.body.item_description,
+				category: req.body.item_category,
+				price: formattedPrice,
+				number_in_stock: req.body.item_num_in_stock,
+				profile_img: result.secure_url,
+				cloudinary_id: result.public_id,
 			});
-		} else {
-			await item.save();
-			res.redirect(item.url);
+
+			// Replace special encoded characters in item name and description
+			item.name = replaceEncodedCharacters(item.name);
+			item.description = replaceEncodedCharacters(item.description);
+
+			if (!errors.isEmpty()) {
+				// There are errors. Render form again with sanitized values/error messages.
+				const category_list = await Category.find({}).exec();
+				res.render("item_form", {
+					title: "Create Item",
+					item: item,
+					categories: category_list,
+					errors: errors.array(),
+				});
+			} else {
+				await item.save();
+				res.redirect(item.url);
+			}
+		} catch (err) {
+			console.log(err);
 		}
 	}),
 ];
@@ -106,55 +119,64 @@ exports.item_update_post = [
 	body("item_num_in_stock").trim().notEmpty().withMessage("Number in stock is required").isInt({ min: 1 }).withMessage("Number in stock must be greater than zero").escape(),
 
 	asyncHandler(async (req, res, next) => {
-		const errors = validationResult(req);
-		const category_list = await Category.find({}).exec();
-		let formattedPrice = parseFloat(req.body.item_price).toFixed(2);
-		console.log(`Formatted price: ${formattedPrice}`);
-		// Create a item object with escaped/trimmed data and old id.
-		const item = new Item({
-			name: req.body.item_name,
-			description: req.body.item_description,
-			category: req.body.item_category,
-			price: formattedPrice,
-			number_in_stock: req.body.item_num_in_stock,
-			image: req.file ? req.file.filename : "bongo-cat.jpeg",
-			_id: req.params.id,
-		});
+		try {
+			const errors = validationResult(req);
+			const category_list = await Category.find({}).exec();
+			let formattedPrice = parseFloat(req.body.item_price).toFixed(2);
+			// Upload image to cloudinary
+			const result = await cloudinary.uploader.upload(req.file.path);
 
-		if (!errors.isEmpty()) {
-			// There are errors. Render form again with sanitized values/error messages.
-			res.render("item_form", {
-				title: "Update Item",
-				categories: category_list,
-				item: item,
-				password_required: true,
-				errors: errors.array(),
+			// Create a item object with escaped/trimmed data and old id.
+			const item = new Item({
+				name: req.body.item_name,
+				description: req.body.item_description,
+				category: req.body.item_category,
+				price: formattedPrice,
+				number_in_stock: req.body.item_num_in_stock,
+				profile_img: result.secure_url,
+				cloudinary_id: result.public_id,
+				_id: req.params.id,
 			});
-			return;
-		} else {
-			if (req.body.password !== process.env.Secret_PASS) {
-				// Password is not correct. Render form again.
+
+			// Replace special encoded characters in item name and description
+			item.name = replaceEncodedCharacters(item.name);
+			item.description = replaceEncodedCharacters(item.description);
+
+			if (!errors.isEmpty()) {
+				// There are errors. Render form again with sanitized values/error messages.
 				res.render("item_form", {
 					title: "Update Item",
 					categories: category_list,
 					item: item,
 					password_required: true,
-					password_error: "ACCESS DENIED, TRY AGAIN!",
+					errors: errors.array(),
 				});
+				return;
 			} else {
-				// Remove the image from the public/upload folder
-				const currItem = await Item.findById(req.params.id).exec();
-				if (currItem.image !== "bongo-cat.jpeg") {
-					fs.unlink(`public/uploads/${currItem.image}`, (err) => {
-						if (err) {
-							console.error(`Error deleting image file: ${err}`);
-						}
+				if (req.body.password !== process.env.Secret_PASS) {
+					// Password is not correct. Render form again.
+					res.render("item_form", {
+						title: "Update Item",
+						categories: category_list,
+						item: item,
+						password_required: true,
+						password_error: "ACCESS DENIED, TRY AGAIN!",
 					});
+				} else {
+					// Update the item object in the database <currItem = the old item>
+					const currItem = await Item.findByIdAndUpdate(req.params.id, item).exec();
+					// If user has a cloudinary_id, delete image from cloudinary
+					if (currItem && currItem.cloudinary_id) {
+						await cloudinary.uploader.destroy(currItem.cloudinary_id);
+					}
+
+					// Update the item object in the database
+					await Item.findByIdAndUpdate(req.params.id, item).exec();
+					res.redirect(item.url);
 				}
-				// Update the item object in the database
-				await Item.findByIdAndUpdate(req.params.id, item).exec();
-				res.redirect(item.url);
 			}
+		} catch (err) {
+			console.error(err);
 		}
 	}),
 ];
@@ -199,18 +221,20 @@ exports.item_delete_post = [
 					password_error: "ACCESS DENIED, TRY AGAIN!",
 				});
 			} else {
-				// Remove the image from the public/upload folder
-				const currItem = await Item.findById(req.params.id).exec();
-				if (currItem.image !== "bongo-cat.jpeg") {
-					fs.unlink(`public/uploads/${currItem.image}`, (err) => {
-						if (err) {
-							console.error(`Error deleting image file: ${err}`);
-						}
-					});
+				// Delete item from database <currItem = the old item>
+				const currItem = await Item.findByIdAndDelete(req.params.id).exec();
+				// If user has a cloudinary_id, delete image from cloudinary
+				if (currItem && currItem.cloudinary_id) {
+					await cloudinary.uploader.destroy(currItem.cloudinary_id);
 				}
-				await Item.findByIdAndDelete(req.params.id);
 				res.redirect("/inventory/items");
 			}
 		}
 	}),
 ];
+
+// Function to replace encoded characters "/"
+function replaceEncodedCharacters(input) {
+	// Replace different variations of encoded "/"
+	return input.replace(/&amp;#x2F;|&#x2F;/g, "/");
+}

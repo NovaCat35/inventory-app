@@ -6,10 +6,11 @@ const Schema = mongoose.Schema;
 const ItemSchema = Schema({
 	name: { type: String, required: true, minLength: 2 },
 	description: { type: String, required: true, maxLength: 300 },
-	category: {type: Schema.Types.ObjectId, ref: "Category", required: true },
-	image: { type: String, default: 'bongo-cat.jpeg' }, 
+	category: { type: Schema.Types.ObjectId, ref: "Category", required: true },
+	profile_img: String,
+	cloudinary_id: String,
 	price: { type: Schema.Types.Decimal128, required: true },
-	number_in_stock: Number,
+	number_in_stock: {type: Number, required: true},
 });
 
 ItemSchema.virtual("url").get(function () {
