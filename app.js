@@ -6,9 +6,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var inventoryRouter = require('./routes/inventory');
+var indexRouter = require('./src/routes/index');
+var usersRouter = require('./src/routes/users');
+var inventoryRouter = require('./src/routes/inventory');
 const compression = require("compression");
 const helmet = require("helmet");
 
