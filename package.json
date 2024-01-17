@@ -12,6 +12,7 @@
 		"scss": "sass --watch public/stylesheets/*.scss public/stylesheets/*.css"
 	},
 	"dependencies": {
+		"cloudinary": "^1.41.2",
 		"compression": "^1.7.4",
 		"cookie-parser": "~1.4.4",
 		"debug": "~2.6.9",

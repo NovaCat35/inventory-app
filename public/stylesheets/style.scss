@@ -249,7 +249,7 @@ img#item-image\ small {
 	&:hover .comment {
 		display: none;
 	}
-	&:hover .hidden {
+	&:hover .hidden, &:active .hidden {
 		color: black;
 		display: inline;
 	}

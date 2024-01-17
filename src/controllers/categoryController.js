@@ -65,6 +65,10 @@ exports.category_create_post = [
 			description: req.body.category_description,
 		});
 
+		// Replace special encoded characters in category name and description
+		category.name = replaceEncodedCharacters(category.name);
+		category.description = replaceEncodedCharacters(category.description);
+
 		if (!errors.isEmpty()) {
 			// There are errors. Render form again with sanitized values/errors messages.
 			res.render("category_form", {
@@ -113,6 +117,10 @@ exports.category_update_post = [
 			description: req.body.category_description,
 			_id: req.params.id, // This is required, or a new ID will be assigned!
 		});
+
+		// Replace special encoded characters in category name and description
+		category.name = replaceEncodedCharacters(category.name);
+		category.description = replaceEncodedCharacters(category.description);
 
 		if (!errors.isEmpty()) {
 			// There are errors. Render form again with sanitized values/error messages.
@@ -182,3 +190,9 @@ exports.category_delete_post = [
 		}
 	}),
 ];
+
+// Function to replace encoded characters "/"
+function replaceEncodedCharacters(input) {
+	// Replace different variations of encoded "/"
+	return input.replace(/&amp;#x2F;|&#x2F;/g, "/");
+}
