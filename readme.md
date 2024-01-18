@@ -28,7 +28,7 @@ Link: https://inventory-cat-cafe.fly.dev 🐈 ☕️
 ## Learning & Challenges 🔥
 Some of the key learning points for this project involved CRUD operations, file upload/multipart forms, and getting it all set up on Cloudinary and production environment.
 
-One of the earlier issues I ran into was dealing with 404 and 500 pages because I wasn't aware of key components of how routes, controllers, and EJS handle some values and paths as I imagined. Through trial and error with testing out different routes and configurations using libraries, I managed to get everything working. Another issue I tackled was originally the changes I made to my model after incorporating images and other changes for forms. I believe I took some valuable lessons in using models and what is good and bad habits dealing with forms as well as file uploads. Pretty much for other problems, after the first breakthrough, everything else came more naturally. 
+One of the earlier issues I ran into was dealing with 404 and 500 pages because I wasn't aware of key components of how routes, controllers, and EJS handle some values and paths as I imagined. Through trial and error with testing out different routes and configurations using libraries, I managed to get everything working. Another issue I tackled was originally the changes I made to my model after incorporating images and other changes for forms. I believe I took some valuable lessons in using models about what is good and bad when dealing with forms as well as file uploads. Pretty much for other problems, after the first breakthrough, everything else came more naturally. 
 
 ## Installation Guide ⚙️
 ### Development

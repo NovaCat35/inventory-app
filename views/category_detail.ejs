@@ -22,18 +22,22 @@
                         <img id="item-image" src="<%= item.profile_img %>" alt="Item Image">
                      <% } else { %>
                         <img id="item-image" src="/images/bongo-cat.jpeg" alt="Item Image">
-                     <%  } %>                  <div class="info-container">
-                     <h2 class="item-name"><a href=<%= item.url %>><%= item.name %></a></h2>
-                     <p>$<%= item.price %></p>
-                     <% if (item.number_in_stock <= 20) { %>
-                        <p class="num-in-stock-alert">Only <%= item.number_in_stock%> left in stock</p>
-                     <% } %>
+                     <%  } %>                  
+                     <div class="info-container">
+                        <h2 class="item-name"><a href=<%= item.url %>><%= item.name %></a></h2>
+                        <p class="item-price">$<%= item.price %></p>
+                        <% if (item.number_in_stock <= 20) { %>
+                           <p class="num-in-stock-alert">Only <%= item.number_in_stock%> left in stock</p>
+                        <% } %>
                   </div>
                </div>
             <% }) %>
          </div>
       <% } else { %>
          <p class="empty-alert">There are currently no items in this category.</p>
+         <form action="/inventory/items/create">
+            <button type="submit" class='small-btn' value="Go to Google">Add an Item</button>
+        </form>
       <% } %>
    </main>
 </body>
