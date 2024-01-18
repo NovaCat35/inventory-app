@@ -43,6 +43,12 @@ p.description {
 }
 .hidden {
 	color: $main-background-color;
+	.unique-symbol{
+		display: none;
+		@media screen and (min-width: 400px){
+			display: inline-block;
+		}
+	}
 }
 
 $blue: rgb(39, 78, 157);
@@ -279,6 +285,9 @@ img.type-cat {
 		height: 90px;
 		width: 190px;
 	}
+	&#punch-cats{
+		width: 155px;
+	}
 }
 img#item-image\ small {
 	width: 30vw;
@@ -335,8 +344,6 @@ img#item-image\ small {
 		margin-right: 40px;
 	}
 }
-
-
 
 // Hidden
 .magic-container {

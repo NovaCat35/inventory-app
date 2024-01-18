@@ -40,6 +40,14 @@ p.description {
 .hidden {
   color: #ffffff;
 }
+.hidden .unique-symbol {
+  display: none;
+}
+@media screen and (min-width: 400px) {
+  .hidden .unique-symbol {
+    display: inline-block;
+  }
+}
 
 h1 {
   color: rgb(39, 78, 157);
@@ -264,6 +272,9 @@ img.type-cat#food-cats {
 img.type-cat#magic-cat {
   height: 90px;
   width: 190px;
+}
+img.type-cat#punch-cats {
+  width: 155px;
 }
 
 img#item-image\ small {

@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <%- include('templates/head')  %>
-  <body>
-    <%- include('templates/navbar')  %>
-    <main>
-      <h1>Inventory App</h1>
-      <p>Welcome to my inventory application! This project is part of my roadmap towards my dream to become a full stack dev. Project inspiration can be found on <a href="https://www.theodinproject.com/lessons/nodejs-inventory-application" target="_blank">The Odin Project</a> Inventory Application.</p>
-      <p>This project essentially allows you to add categories and items under each category. For update/delete, there is a password in place to secure against those destructive evil kitties...perhaps some friendlier cats in this corner of the web might give you a clue about it. Give it a go!</p>
-      <p>
-        . ╱|、<br>
-        (˚ˎ 。7<br>
-        |、˜〵<br>
-        じしˍ,)ノ
-      </p>
-      
-      <hr>
-      <div class="status-container">
-        <div class="status-info">
-          <h2>Status</h2>
-          <dl>
-            <dt>Total Categories</dt>
-            <dd><%= categories.length %></dd>
-            <dt>Number of Items</dt>
-            <dd><%= items.length %></dd>
-            <p class="hidden">Ignore "-" and "*" during final input.</p>
-            <p class="hidden">A=1, B=2, C=3, ..., Z=26 &#10548;</p>
-          </dl>
-        </div>
-       
-        <img id='internet-gif' src="/images/internet.gif" alt="internet gif">
-      </div>
-      <script src="/scripts/img_timeout.js"></script>
-    </main>
-  </body>
+	<%- include('templates/head') %>
+	<body>
+		<%- include('templates/navbar') %>
+		<main>
+			<h1>Inventory App</h1>
+			<p>Welcome to my inventory application! This project is part of my roadmap towards my dream to become a full stack dev. Project inspiration can be found on <a href="https://www.theodinproject.com/lessons/nodejs-inventory-application" target="_blank">The Odin Project</a> Inventory Application.</p>
+			<p>This project essentially allows you to add categories and items under each category. For update/delete, there is a password in place to secure against those destructive evil kitties...perhaps some friendlier cats in this corner of the web might give you a clue about it. Give it a go!</p>
+			<p>
+				. ╱|、<br />
+				(˚ˎ 。7<br />
+				|、˜〵<br />
+				じしˍ,)ノ
+			</p>
+
+			<hr />
+			<div class="status-container">
+				<div class="status-info">
+					<h2>Status</h2>
+					<dl>
+						<dt>Total Categories</dt>
+						<dd><%= categories.length %></dd>
+						<dt>Number of Items</dt>
+						<dd><%= items.length %></dd>
+						<p class="hidden">Ignore "-" and "*" during final input.</p>
+						<p class="hidden">A=1, B=2, C=3, ..., Z=26 <span class="unique-symbol">&#10548;</span></p>
+					</dl>
+				</div>
+
+				<img id="internet-gif" src="/images/internet.gif" alt="internet gif" />
+			</div>
+			<script src="/scripts/img_timeout.js"></script>
+		</main>
+	</body>
 </html>
