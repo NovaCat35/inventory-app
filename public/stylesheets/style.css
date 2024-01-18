@@ -92,6 +92,30 @@ button.small-btn:hover {
   color: #fff;
 }
 
+/* MAIN BACKGROUND */
+.video-container {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  width: 300px;
+  height: 220px;
+}
+.video-container .tv-box {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+.video-container .video-background {
+  width: 90%;
+  height: 85%;
+  object-fit: cover;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+}
+
 nav {
   font-family: "Pixelify Sans", sans-serif;
   display: flex;
