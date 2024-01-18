@@ -55,18 +55,33 @@ exports.item_create_post = [
 		try {
 			const errors = validationResult(req);
 			let formattedPrice = parseFloat(req.body.item_price).toFixed(2);
-			// Upload image to cloudinary
-			const result = await cloudinary.uploader.upload(req.file.path);
 
-			const item = new Item({
-				name: req.body.item_name,
-				description: req.body.item_description,
-				category: req.body.item_category,
-				price: formattedPrice,
-				number_in_stock: req.body.item_num_in_stock,
-				profile_img: result.secure_url,
-				cloudinary_id: result.public_id,
-			});
+			let item;
+			
+			// Check if a file is uploaded
+			if (req.file) {
+				// Upload image to cloudinary
+				const result = await cloudinary.uploader.upload(req.file.path);
+
+				item = new Item({
+					name: req.body.item_name,
+					description: req.body.item_description,
+					category: req.body.item_category,
+					price: formattedPrice,
+					number_in_stock: req.body.item_num_in_stock,
+					profile_img: result.secure_url,
+					cloudinary_id: result.public_id,
+				});
+			} else {
+				// If no file uploaded, create item without image
+				item = new Item({
+					name: req.body.item_name,
+					description: req.body.item_description,
+					category: req.body.item_category,
+					price: formattedPrice,
+					number_in_stock: req.body.item_num_in_stock,
+				});
+			}
 
 			// Replace special encoded characters in item name and description
 			item.name = replaceEncodedCharacters(item.name);
@@ -123,21 +138,35 @@ exports.item_update_post = [
 			const errors = validationResult(req);
 			const category_list = await Category.find({}).exec();
 			let formattedPrice = parseFloat(req.body.item_price).toFixed(2);
-			// Upload image to cloudinary
-			const result = await cloudinary.uploader.upload(req.file.path);
 
-			// Create a item object with escaped/trimmed data and old id.
-			const item = new Item({
-				name: req.body.item_name,
-				description: req.body.item_description,
-				category: req.body.item_category,
-				price: formattedPrice,
-				number_in_stock: req.body.item_num_in_stock,
-				profile_img: result.secure_url,
-				cloudinary_id: result.public_id,
-				_id: req.params.id,
-			});
+			let item;
+			
+			// Check if a file is uploaded
+			if (req.file) {
+				// Upload image to cloudinary
+				const result = await cloudinary.uploader.upload(req.file.path);
 
+				item = new Item({
+					name: req.body.item_name,
+					description: req.body.item_description,
+					category: req.body.item_category,
+					price: formattedPrice,
+					number_in_stock: req.body.item_num_in_stock,
+					profile_img: result.secure_url,
+					cloudinary_id: result.public_id,
+					_id: req.params.id, // This is required, or a new ID will be assigned!
+				});
+			} else {
+				// If no file uploaded, create item without image
+				item = new Item({
+					name: req.body.item_name,
+					description: req.body.item_description,
+					category: req.body.item_category,
+					price: formattedPrice,
+					number_in_stock: req.body.item_num_in_stock,
+					_id: req.params.id,
+				});
+			}
 			// Replace special encoded characters in item name and description
 			item.name = replaceEncodedCharacters(item.name);
 			item.description = replaceEncodedCharacters(item.description);

@@ -56,10 +56,10 @@ app.use(
 	helmet.contentSecurityPolicy({
 		directives: {
 			"script-src": ["'self'"],
-      "img-src": ["'self'", "*.cloudinary.com"],
+			"img-src": ["'self'", "*.cloudinary.com"],
 		},
 	})
-); 
+);
 app.use(compression()); // Compress all routes
 
 app.use("/", indexRouter);
