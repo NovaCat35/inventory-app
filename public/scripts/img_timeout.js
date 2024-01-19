@@ -1,4 +1,4 @@
-// Use JavaScript to hide the internet-gif after 5.3 seconds
+// Use JavaScript to hide the internet-gif after 5.2 seconds
 document.addEventListener("DOMContentLoaded", function () {
 	const internetGif = document.getElementById("internet-gif");
 	const catMarchVideo = document.getElementById("background-video");
@@ -6,6 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	setTimeout(function () {
 		internetGif.style.display = "none";
 		catMarchVideo.play();
-	}, 5300);
+	}, 5200);
 });
 

@@ -328,10 +328,9 @@ img#item-image\ small {
 	.hidden {
 		display: none;
 	}
-	&:hover .comment {
+	&:active .comment {
 		display: none;
 	}
-	&:hover .hidden,
 	&:active .hidden {
 		color: black;
 		display: inline;

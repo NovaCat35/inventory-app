@@ -314,10 +314,10 @@ img#item-image\ small {
 .secret-img1 .hidden {
   display: none;
 }
-.secret-img1:hover .comment {
+.secret-img1:active .comment {
   display: none;
 }
-.secret-img1:hover .hidden, .secret-img1:active .hidden {
+.secret-img1:active .hidden {
   color: black;
   display: inline;
 }
