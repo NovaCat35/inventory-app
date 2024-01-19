@@ -7,7 +7,6 @@ body {
   padding: 0;
   margin: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  cursor: url("/public/images/auto-cursor.svg"), auto;
 }
 
 a {
@@ -17,7 +16,6 @@ a {
 }
 a:hover {
   text-decoration: underline;
-  cursor: url("/public/images/hand-pointer.svg"), pointer;
 }
 
 img {
@@ -43,7 +41,7 @@ p.description {
 .hidden .unique-symbol {
   display: none;
 }
-@media screen and (min-width: 400px) {
+@media screen and (min-width: 1000px) {
   .hidden .unique-symbol {
     display: inline-block;
   }
@@ -94,11 +92,12 @@ button.small-btn:hover {
 
 /* MAIN BACKGROUND */
 .video-container {
-  position: absolute;
-  right: 30px;
-  bottom: 30px;
-  width: 300px;
-  height: 220px;
+  position: relative;
+  width: 500px;
+  height: 320px;
+  top: 50px;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .video-container .tv-box {
   position: absolute;
@@ -114,6 +113,18 @@ button.small-btn:hover {
   position: absolute;
   top: 5%;
   left: 5%;
+}
+@media screen and (min-width: 1000px) {
+  .video-container {
+    position: absolute;
+    width: 300px;
+    height: 220px;
+    right: 30px;
+    bottom: 30px;
+    left: auto;
+    top: auto;
+    transform: none;
+  }
 }
 
 nav {
@@ -271,8 +282,15 @@ form button {
 }
 
 img#internet-gif {
+  display: none;
   position: absolute;
   width: 500px;
+  z-index: 2;
+}
+@media screen and (min-width: 1000px) {
+  img#internet-gif {
+    display: block;
+  }
 }
 
 img#github-icon {
@@ -341,10 +359,55 @@ img#item-image\ small {
 
 .status-container {
   display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 10px;
 }
-.status-container h2 {
+.status-container .status-info h2 {
+  text-align: center;
   font-size: 1.3rem;
+  border-radius: 5px;
   color: rgb(39, 78, 157);
+  border: 2px solid rgb(39, 78, 157);
+}
+@media screen and (min-width: 1000px) {
+  .status-container .status-info h2 {
+    text-align: left;
+    border: none;
+  }
+}
+.status-container .status-info dl {
+  margin-top: -5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+@media screen and (min-width: 1000px) {
+  .status-container .status-info dl {
+    margin-top: 0;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+}
+.status-container .status-info dl dt {
+  font-family: "Pixelify Sans", sans-serif;
+  font-weight: 700;
+  text-align: center;
+}
+.status-container .status-info dl dd {
+  margin: 0;
+}
+@media screen and (min-width: 1000px) {
+  .status-container .status-info dl dd {
+    margin-left: 40px;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .status-container {
+    margin-top: 0;
+    justify-content: flex-start;
+  }
 }
 
 .main-detail-container {

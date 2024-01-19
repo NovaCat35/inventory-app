@@ -1,6 +1,7 @@
 // @import './fonts.scss';
 @import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap");
 $main-background-color: #ffffff;
+$pixel: "Pixelify Sans", sans-serif;
 
 // General Styling
 * {
@@ -12,7 +13,7 @@ body {
 	padding: 0;
 	margin: 0;
 	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-	cursor: url("/public/images/auto-cursor.svg"), auto;
+	// cursor: url("/public/images/auto-cursor.svg"), auto;
 }
 
 a {
@@ -21,7 +22,7 @@ a {
 	text-decoration: none;
 	&:hover {
 		text-decoration: underline;
-		cursor: url("/public/images/hand-pointer.svg"), pointer;
+		// cursor: url("/public/images/hand-pointer.svg"), pointer;
 	}
 }
 
@@ -45,7 +46,7 @@ p.description {
 	color: $main-background-color;
 	.unique-symbol {
 		display: none;
-		@media screen and (min-width: 400px) {
+		@media screen and (min-width: 1000px) {
 			display: inline-block;
 		}
 	}
@@ -54,7 +55,7 @@ p.description {
 $blue: rgb(39, 78, 157);
 h1 {
 	color: $blue;
-	font-family: "Pixelify Sans", sans-serif;
+	font-family: $pixel;
 }
 
 h2 {
@@ -96,12 +97,13 @@ button {
 }
 
 /* MAIN BACKGROUND */
-.video-container{
-	position: absolute;
-	right: 30px ;
-	bottom: 30px;
-	width: 300px;
-	height: 220px;
+.video-container {
+	position: relative;
+	width: 500px;
+	height: 320px;
+	top: 50px;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	.tv-box {
 		position: absolute;
 		left: 0;
@@ -110,17 +112,23 @@ button {
 		z-index: 2;
 	}
 	.video-background {
-		width: 90%; 
-		height: 85%; 
+		width: 90%;
+		height: 85%;
 		object-fit: cover;
 		position: absolute;
-		top: 5%; 
+		top: 5%;
 		left: 5%;
-		// left: 50%;
-		// top: 50%;
-		// transform: translate(-50%, -50%);
-		// z-index: -1;
-	 }
+	}
+	@media screen and (min-width: 1000px) {
+		position: absolute;
+		width: 300px;
+		height: 220px;
+		right: 30px;
+		bottom: 30px;
+		left: auto;
+		top: auto;
+		transform: none;
+	}
 }
 
 // NAVBAR
@@ -192,13 +200,13 @@ nav {
 			border-radius: 10px;
 		}
 		.item-category {
-			a{
+			a {
 				text-decoration: none;
 				padding: 3px 15px;
 				background-color: #1b2d46;
-				color:#42c3f5;
+				color: #42c3f5;
 				border-radius: 5px;
-				transition: .3s ease-in-out all;
+				transition: 0.3s ease-in-out all;
 				&:hover {
 					background-color: #134fa4;
 					color: #fff;
@@ -269,29 +277,33 @@ form {
 	font-weight: 700;
 	margin: 0;
 	margin-bottom: 15px;
-	padding-left: 20px; 
- 
+	padding-left: 20px;
+
 	li {
-	  display: flex;
-	  align-items: center;
-	  margin: 5px;
-	  font-size: 1.2rem;
-	  list-style: none; 
-	  position: relative;
+		display: flex;
+		align-items: center;
+		margin: 5px;
+		font-size: 1.2rem;
+		list-style: none;
+		position: relative;
 	}
- 
+
 	li::before {
-	  content: url('/images/radio-btn.svg');
-	  display: inline-block;
-	  margin-right: 15px; 
+		content: url("/images/radio-btn.svg");
+		display: inline-block;
+		margin-right: 15px;
 	}
- }
- 
+}
 
 // IMAGES
 img#internet-gif {
+	display: none;
 	position: absolute;
 	width: 500px;
+	z-index: 2;
+	@media screen and (min-width: 1000px) {
+		display: block;
+	}
 }
 img#github-icon {
 	width: 40px;
@@ -313,7 +325,7 @@ img.type-cat {
 		height: 90px;
 		width: 190px;
 	}
-	&#punch-cats{
+	&#punch-cats {
 		width: 155px;
 	}
 }
@@ -356,9 +368,48 @@ img#item-image\ small {
 // Home page Status Container
 .status-container {
 	display: flex;
-	h2 {
-		font-size: 1.3rem;
-		color: $blue;
+	justify-content: center;
+	margin-top: 30px;
+	margin-bottom: 10px;
+	.status-info{
+		h2 {
+			text-align: center;
+			font-size: 1.3rem;
+			border-radius: 5px;
+			color: $blue;
+			border: 2px solid $blue;
+			@media screen and (min-width: 1000px) {
+				text-align: left;
+				border: none;
+			}
+		}
+		dl {
+			margin-top: -5px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			@media screen and (min-width: 1000px) {
+				margin-top: 0;
+				justify-content: flex-start;
+				align-items: flex-start;
+			}
+			dt {
+				font-family: $pixel;
+				font-weight: 700;
+				text-align: center;
+			}
+			dd {
+				margin: 0;
+				@media screen and (min-width: 1000px) {
+					margin-left: 40px;
+				}
+			}
+		}
+	}
+	@media screen and (min-width: 1000px) {
+		margin-top: 0;
+		justify-content: flex-start;
 	}
 }
 
