@@ -60,4 +60,6 @@ npm install express-rate-limit
 ```
 > Reminder to change env variables(within host provider) & set node version in our package.json & NODE_ENV = "production"
 
-
+## Sources
+- Cat March (MitchiriNeko): https://www.youtube.com/watch?v=hLkez3oL6s4
+- Cat Typed-Emojis: https://emojicombos.com/cat

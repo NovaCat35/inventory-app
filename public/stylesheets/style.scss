@@ -95,6 +95,34 @@ button {
 	}
 }
 
+/* MAIN BACKGROUND */
+.video-container{
+	position: absolute;
+	right: 30px ;
+	bottom: 30px;
+	width: 300px;
+	height: 220px;
+	.tv-box {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		z-index: 2;
+	}
+	.video-background {
+		width: 90%; 
+		height: 85%; 
+		object-fit: cover;
+		position: absolute;
+		top: 5%; 
+		left: 5%;
+		// left: 50%;
+		// top: 50%;
+		// transform: translate(-50%, -50%);
+		// z-index: -1;
+	 }
+}
+
 // NAVBAR
 nav {
 	font-family: "Pixelify Sans", sans-serif;
@@ -300,10 +328,9 @@ img#item-image\ small {
 	.hidden {
 		display: none;
 	}
-	&:hover .comment {
+	&:active .comment {
 		display: none;
 	}
-	&:hover .hidden,
 	&:active .hidden {
 		color: black;
 		display: inline;
