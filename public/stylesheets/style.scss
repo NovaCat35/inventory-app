@@ -43,9 +43,9 @@ p.description {
 }
 .hidden {
 	color: $main-background-color;
-	.unique-symbol{
+	.unique-symbol {
 		display: none;
-		@media screen and (min-width: 400px){
+		@media screen and (min-width: 400px) {
 			display: inline-block;
 		}
 	}
