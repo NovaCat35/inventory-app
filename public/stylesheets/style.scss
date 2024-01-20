@@ -13,7 +13,8 @@ body {
 	padding: 0;
 	margin: 0;
 	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-	// cursor: url("/public/images/auto-cursor.svg"), auto;
+	width: 100vw;
+	height: 100vh;
 }
 
 a {
@@ -22,7 +23,6 @@ a {
 	text-decoration: none;
 	&:hover {
 		text-decoration: underline;
-		// cursor: url("/public/images/hand-pointer.svg"), pointer;
 	}
 }
 
@@ -96,42 +96,15 @@ button {
 	}
 }
 
-/* MAIN BACKGROUND */
-.video-container {
-	position: relative;
-	width: 500px;
-	height: 320px;
-	top: 50px;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	.tv-box {
-		position: absolute;
-		left: 0;
-		top: 0;
-		width: 100%;
-		z-index: 2;
-	}
-	.video-background {
-		width: 90%;
-		height: 85%;
-		object-fit: cover;
-		position: absolute;
-		top: 5%;
-		left: 5%;
-	}
-	@media screen and (min-width: 1000px) {
-		position: absolute;
-		width: 300px;
-		height: 220px;
-		right: 30px;
-		bottom: 30px;
-		left: auto;
-		top: auto;
-		transform: none;
-	}
+.github-link {
+	position: absolute;
+	margin: 0;
+	right: 15px;
 }
 
-// NAVBAR
+/**********************************
+* * NAVBAR * *
+**********************************/ 
 nav {
 	font-family: "Pixelify Sans", sans-serif;
 	display: flex;
@@ -152,6 +125,91 @@ nav {
 		padding: 0;
 		margin: 0;
 	}
+	@media screen and (min-width: 800px) {
+		font-size: 21px;
+		padding: 18px 30px;
+	}
+}
+
+/**********************************
+* * HOME PAGE * *
+**********************************/ 
+/* MAIN TV VIDEO BACKGROUND */
+.video-container {
+	position: relative;
+	width: 500px;
+	height: 320px;
+	top: 50px;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	overflow: hidden;
+	.tv-box {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		z-index: 2;
+	}
+	.video-background {
+		width: 90%;
+		height: 85%;
+		object-fit: cover;
+		position: absolute;
+		top: 5%;
+		left: 5%;
+	}
+	.fuzzy-overlay {
+		position: absolute;
+		width: 85%;
+		height: 100%;
+		inset: 9% 5.3%;
+		background-image: url("../images/noise.png");
+		opacity: 45%;
+		animation: shift 0.2s linear infinite both;
+		@media screen and (min-width: 1000px) {
+			width: 85%;
+			height: 77%;
+		}
+	}
+	.volume-btn {
+		cursor: pointer;
+		position: absolute;
+		border: 3.5px solid #a70000;
+		// box-shadow: 120px 80px 40px 20px #0ff;
+		z-index: 5;
+		width: 52px;
+		height: 52px;
+		bottom: 103px;
+		right: 20px;
+		border-radius: 50%;
+		animation: flash-active 2s infinite; /* Default animation for active */
+		&.active {
+			border-color: #00a796;
+		}
+		&.video-playing {
+			animation: none;
+		}
+		&.disable {
+			border-color: red;
+			animation: flash-disabled 2s infinite;
+		}
+		@media screen and (min-width: 1000px) {
+			width: 42px;
+			height: 42px;
+			bottom: 104px;
+			right: 13px;
+		}
+	}
+	@media screen and (min-width: 1000px) {
+		position: absolute;
+		width: 380px;
+		height: 270px;
+		right: 65px;
+		bottom: 20px;
+		left: auto;
+		top: auto;
+		transform: none;
+	}
 }
 
 // Header container found in list pages. Contains the 'add icon' button.
@@ -164,6 +222,102 @@ nav {
 		width: 30px;
 	}
 }
+// HOME Header Title
+.app-title {
+	font-size: 2.05rem;
+	margin-bottom: 15px;
+}
+
+.home-info-container {
+	padding: 5px 20px;
+	background-color: rgb(48, 131, 182);
+	border-radius: 10px;
+	color: rgb(255, 255, 255);
+	a {
+		color: rgb(243, 153, 183);
+		font-weight: 700;
+	}
+}
+
+// Home page Status Container
+.status-container {
+	display: flex;
+	justify-content: center;
+	margin-top: 30px;
+	margin-bottom: 10px;
+	.status-info {
+		h2 {
+			text-align: center;
+			font-size: 1.3rem;
+			border-radius: 5px;
+			color: $blue;
+			border: 2px solid $blue;
+			@media screen and (min-width: 1000px) {
+				// text-align: left;
+				// // border: none;
+				// padding-left: 30px;
+			}
+		}
+		dl {
+			margin-top: -5px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			dt {
+				font-family: $pixel;
+				font-size: 1.05rem;
+				font-weight: 700;
+				text-align: center;
+			}
+			dd {
+				margin: 0;
+			}
+		}
+	}
+	@media screen and (min-width: 1000px) {
+		margin-top: 0;
+		justify-content: flex-start;
+	}
+}
+
+/**********************************
+* * Categories & Items PAGES * *
+**********************************/ 
+// Alert color
+.num-in-stock-alert,
+.error-msg,
+.empty-alert,
+.alert {
+	color: rgb(214, 10, 10);
+}
+
+// General form page
+form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+	margin: 20px 0;
+	.form-group {
+		display: flex;
+		flex-direction: column;
+		&#password-container {
+			align-self: flex-start;
+		}
+	}
+	input,
+	select,
+	textarea {
+		margin-top: 5px;
+		padding: 5px;
+		width: 80vw;
+	}
+	button {
+		margin-top: 10px;
+		width: 60vw;
+	}
+}
 
 // Item cards & details
 .item-list-container {
@@ -172,13 +326,13 @@ nav {
 	grid-template: 1fr / repeat(auto-fill, minmax(270px, 1fr));
 	gap: 20px;
 	.item-container {
-		box-shadow: 0px 0px 3px rgb(92, 92, 95);
+		box-shadow: 0px 1px 5px rgb(153, 176, 206);
 		// background-color: rgb(215, 228, 242);
 		background-color: $main-background-color;
-		border-radius: 8px;
+		border-radius: 10px;
 		position: relative;
 		img#item-image {
-			border-radius: 8px;
+			border-radius: 10px;
 			border-bottom-right-radius: 0;
 			border-bottom-left-radius: 0;
 			border-bottom: none;
@@ -221,41 +375,6 @@ nav {
 	}
 }
 
-// Alert color
-.num-in-stock-alert,
-.error-msg,
-.empty-alert,
-.alert {
-	color: rgb(214, 10, 10);
-}
-
-// General form page
-form {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 20px;
-	margin: 20px 0;
-	.form-group {
-		display: flex;
-		flex-direction: column;
-		&#password-container {
-			align-self: flex-start;
-		}
-	}
-	input,
-	select,
-	textarea {
-		margin-top: 5px;
-		padding: 5px;
-		width: 80vw;
-	}
-	button {
-		margin-top: 10px;
-		width: 60vw;
-	}
-}
-
 // Detail page specific header. Contains name & description
 .category_detail_header,
 .item_detail_header {
@@ -295,11 +414,23 @@ form {
 	}
 }
 
-// IMAGES
+// Detail page setup
+.main-detail-container {
+	padding: 0;
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	.info-container {
+		margin-right: 40px;
+	}
+}
+
+/**********************************
+* * IMAGES * *
+**********************************/ 
 img#internet-gif {
 	display: none;
 	position: absolute;
-	width: 500px;
+	width: 400px;
 	z-index: 2;
 	@media screen and (min-width: 1000px) {
 		display: block;
@@ -329,6 +460,17 @@ img.type-cat {
 		width: 155px;
 	}
 }
+img#coffee-img {
+	display: none;
+	position: absolute;
+	width: 150px;
+	right: 450px;
+	bottom: -10px;
+	z-index: 10;
+	@media screen and (min-width: 1000px) {
+		display: block;
+	}
+}
 img#item-image\ small {
 	width: 30vw;
 }
@@ -348,11 +490,10 @@ img#item-image\ small {
 		display: inline;
 	}
 }
-.github-link {
-	position: absolute;
-	margin: 0;
-	right: 15px;
-}
+
+/**********************************
+* * PASSWORD * *
+**********************************/ 
 // Password container
 .password-container {
 	position: relative;
@@ -365,65 +506,9 @@ img#item-image\ small {
 	}
 }
 
-// Home page Status Container
-.status-container {
-	display: flex;
-	justify-content: center;
-	margin-top: 30px;
-	margin-bottom: 10px;
-	.status-info{
-		h2 {
-			text-align: center;
-			font-size: 1.3rem;
-			border-radius: 5px;
-			color: $blue;
-			border: 2px solid $blue;
-			@media screen and (min-width: 1000px) {
-				text-align: left;
-				border: none;
-			}
-		}
-		dl {
-			margin-top: -5px;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-			@media screen and (min-width: 1000px) {
-				margin-top: 0;
-				justify-content: flex-start;
-				align-items: flex-start;
-			}
-			dt {
-				font-family: $pixel;
-				font-weight: 700;
-				text-align: center;
-			}
-			dd {
-				margin: 0;
-				@media screen and (min-width: 1000px) {
-					margin-left: 40px;
-				}
-			}
-		}
-	}
-	@media screen and (min-width: 1000px) {
-		margin-top: 0;
-		justify-content: flex-start;
-	}
-}
-
-// Detail page setup
-.main-detail-container {
-	padding: 0;
-	display: grid;
-	grid-template-columns: 1fr 2fr;
-	.info-container {
-		margin-right: 40px;
-	}
-}
-
-// Hidden
+/**********************************
+* * SHHH * *
+**********************************/ 
 .magic-container {
 	position: relative;
 	display: flex;
@@ -436,3 +521,34 @@ img#item-image\ small {
 	margin-top: -10px;
 	margin-bottom: -25px;
 }
+
+
+/**********************************
+* * KEYFRAME ANIMATION * *
+**********************************/ 
+@keyframes shift {
+	0% {
+		transform: translateX(3%) translateY(3%);
+	}
+	100% {
+		transform: translateX(-3%) translateY(-3%);
+	}
+}
+
+@keyframes flash-active {
+	0%, 100% {
+	  box-shadow: 0px 0px 15px 5px #0ff;
+	}
+	50% {
+	  box-shadow: none;
+	}
+ }
+ 
+ @keyframes flash-disabled {
+	0%, 100% {
+	  box-shadow: 0px 0px 15px 5px red;
+	}
+	50% {
+	  box-shadow: none;
+	}
+ }

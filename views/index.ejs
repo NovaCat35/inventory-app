@@ -4,15 +4,17 @@
 	<body>
 		<%- include('templates/navbar') %>
 		<main>
-			<h1>Inventory Cat Cafe</h1>
-			<p>Welcome to my inventory cat cafe, where you can populate this corner of the internet with fun items for these silly cats! This project is part of my roadmap towards my dream to become a full stack dev. Project inspiration can be found on <a href="https://www.theodinproject.com/lessons/nodejs-inventory-application" target="_blank">The Odin Project</a> Inventory Application.</p>
-			<p>Essential functions include adding categories and their respective items. For update/delete, there is a password in place to secure against those destructive evil kitties. Perhaps, some friendlier cats may give you a clue about it. Anyway, enjoy the stay!</p>
-			<p>
-				. ╱|、<br />
-				(˚ˎ 。7<br />
-				|、˜〵<br />
-				じしˍ,)ノ
-			</p>
+			<h1 class="app-title">Inventory Cat Cafe</h1>
+			<div class="home-info-container">
+				<p>Welcome to my inventory cat cafe, where you can populate this corner of the internet with fun items for these silly cats! This project is part of my roadmap towards my dream to become a full stack dev. Project inspiration can be found on <a href="https://www.theodinproject.com/lessons/nodejs-inventory-application" target="_blank">The Odin Project</a> Inventory Application.</p>
+				<p>Essential functions include adding categories and their respective items. For update/delete, there is a password in place to secure against those destructive evil kitties. Perhaps, some friendlier cats may give you a clue about it. Anyway, enjoy the stay!</p>
+			</div>
+				<p>
+					. ╱|、<br />
+					(˚ˎ 。7<br />
+					|、˜〵<br />
+					じしˍ,)ノ
+				</p>
 
 			<hr />
 			<div class="status-container">
@@ -31,10 +33,13 @@
 			</div>
       <div class="video-container">
         <img class="tv-box" src="/images/tv-screen.png" alt="tv-screen">
-        <video class="video-background" id="background-video" loop muted poster="/images/bongo-cat.jpeg">
+        <video class="video-background" id="background-video" loop muted playsInline poster="/images/bongo-cat.jpeg">
           <source src="/images/cat-march.mp4" type="video/mp4">
         </video>
+		  <div class="volume-btn disable"></div>
+		  <div class="fuzzy-overlay"></div>
       </div>
+		<img id="coffee-img" src="/images/coffee.png" alt="">
 		</main>			
     <script src="/scripts/img_timeout.js"></script>
 	</body>
