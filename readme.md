@@ -5,6 +5,8 @@ Welcome to my inventory app! This project is created to showcase dynamic site op
 
 Link: https://inventory-cat-cafe.fly.dev 🐈 ☕️
 
+![chrome-capture-2024-1-19](https://github.com/NovaCat35/inventory-app/assets/54908064/04118c66-62ab-47df-a8d7-0015e5688909)
+
 -----
 # Features 🎯
 - ALL CRUD operations for uploading categories and items 
@@ -60,6 +62,7 @@ npm install express-rate-limit
 ```
 > Reminder to change env variables(within host provider) & set node version in our package.json & NODE_ENV = "production"
 
-## Sources
+## Image Credits & Sources 🖌️
 - Cat March (MitchiriNeko): https://www.youtube.com/watch?v=hLkez3oL6s4
 - Cat Typed-Emojis: https://emojicombos.com/cat
+- SVG and Icons: [google](https://fonts.google.com/icons)https://fonts.google.com/icons
