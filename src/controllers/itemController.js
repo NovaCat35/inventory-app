@@ -265,5 +265,5 @@ exports.item_delete_post = [
 // Function to replace encoded characters "/"
 function replaceEncodedCharacters(input) {
 	// Replace different variations of encoded "/"
-	return input.replace(/&amp;#x2F;|&#x2F;/g, "/");
+	return input.replace(/&amp;#x2F;|&#x2F;|&#x27;/g, "/");
 }
