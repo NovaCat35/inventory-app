@@ -33,10 +33,6 @@ img {
   user-drag: none;
 }
 
-p.description {
-  word-break: break-all;
-}
-
 .hidden {
   color: #ffffff;
 }

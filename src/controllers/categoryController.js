@@ -191,8 +191,13 @@ exports.category_delete_post = [
 	}),
 ];
 
-// Function to replace encoded characters "/"
+// Function to replace encoded characters
 function replaceEncodedCharacters(input) {
-	// Replace different variations of encoded "/"
-	return input.replace(/&amp;#x2F;|&#x2F;/g, "/");
+    // Replace "&amp;#x2F;" with "/"
+    input = input.replace(/&amp;#x2F;/g, "/");
+    
+    // Replace "&#x2F;" with "'"
+    input = input.replace(/&#x2F;/g, "'");
+
+	 return input;
 }
