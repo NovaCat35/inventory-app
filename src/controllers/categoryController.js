@@ -193,11 +193,11 @@ exports.category_delete_post = [
 
 // Function to replace encoded characters
 function replaceEncodedCharacters(input) {
-    // Replace "&amp;#x2F;" with "/"
-    input = input.replace(/&amp;#x2F;/g, "/");
+    // Replace "&amp;#x2F;" and  "&#x2F;" with "/"
+    input = input.replace(/&amp;#x2F;|&#x2F;/g, "/");
     
-    // Replace "&#x2F;" with "'"
-    input = input.replace(/&#x2F;/g, "'");
+    // Replace "&#x27;" with single quote "'"
+    input = input.replace(/&#x27;/g, "'");
 
 	 return input;
 }
