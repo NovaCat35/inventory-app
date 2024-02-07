@@ -134,8 +134,8 @@ nav {
 /* MAIN TV VIDEO BACKGROUND */
 .video-container {
 	position: relative;
-	width: 500px;
-	height: 320px;
+	width: 325px;
+	height: 270px;
 	top: 50px;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -148,21 +148,30 @@ nav {
 		z-index: 2;
 	}
 	.video-background {
-		width: 90%;
-		height: 85%;
+		width: 80%;
+		height: 73%;
 		object-fit: cover;
 		position: absolute;
 		top: 5%;
 		left: 5%;
+		@media screen and (min-width: 550px) {
+			width: 90%;
+			height: 85%;
+		}
 	}
 	.fuzzy-overlay {
 		position: absolute;
-		width: 85%;
-		height: 100%;
-		inset: 9% 5.3%;
+		width: 77%;
+		height: 70%;
+		inset: 7% 5.3%;
 		background-image: url("../images/noise.png");
 		opacity: 45%;
 		animation: shift 0.2s linear infinite both;
+		@media screen and (min-width: 550px) {
+			width: 85%;
+			height: 100%;
+			inset: 9% 5.3%;
+		}
 		@media screen and (min-width: 1000px) {
 			width: 85%;
 			height: 77%;
@@ -174,10 +183,10 @@ nav {
 		border: 3.5px solid #a70000;
 		// box-shadow: 120px 80px 40px 20px #0ff;
 		z-index: 5;
-		width: 52px;
-		height: 52px;
-		bottom: 103px;
-		right: 20px;
+		width: 39px;
+		height: 38px;
+		bottom: 126px;
+		right: 10px;
 		border-radius: 50%;
 		animation: flash-active 2s infinite; /* Default animation for active */
 		&.active {
@@ -190,12 +199,22 @@ nav {
 			border-color: red;
 			animation: flash-disabled 2s infinite;
 		}
+		@media screen and (min-width: 550px) {
+			width: 52px;
+			height: 52px;
+			bottom: 103px;
+			right: 20px;
+		}
 		@media screen and (min-width: 1000px) {
 			width: 42px;
 			height: 42px;
 			bottom: 104px;
 			right: 13px;
 		}
+	}
+	@media screen and (min-width: 550px) {
+		width: 500px;
+		height: 320px;
 	}
 	@media screen and (min-width: 1000px) {
 		position: absolute;
