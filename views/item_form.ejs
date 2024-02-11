@@ -21,7 +21,7 @@
                <option value="" selected disabled hidden>-- Select an Option --</option>
                <% categories.forEach(category => { %>
                   <option value="<%= category._id %>" <% if (typeof item !== "undefined" && typeof item.category !== "undefined" && item.category.toString() === category._id.toString()) { %>selected<% } %>>
-                     <%= category.name %>
+                     <%- category.name %>
                   </option>
                <% }) %>
             </select>

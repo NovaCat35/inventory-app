@@ -11,7 +11,7 @@
 			<% if(typeof category_list !== 'undefined') { %>
 				<ul class="list">
 					<% for(let i = 0; i < category_list.length; i++) { %>
-					<li><a href=<%= category_list[i].url %>><%= category_list[i].name %></a></li>
+					<li><a href=<%= category_list[i].url %>><%- category_list[i].name %></a></li>
 					<% } %>
 				</ul>
 			<% } else { %>

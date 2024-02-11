@@ -6,7 +6,7 @@
    <main>
       <div class="category_detail_header">
          <div class="header-container">
-            <h1 class="name"><%= category.name %></h1>
+            <h1 class="name"><%- category.name %></h1>
             <a href="<%= category.url %>/update"><img class="edit-icon" src="/images/edit-icon.svg" alt="edit-icon"></a>
             <a href="<%= category.url %>/delete"><img class="delete-icon" src="/images/delete-icon.svg" alt="delete-icon"></a>
          </div>
@@ -24,7 +24,7 @@
                         <img id="item-image" src="/images/bongo-cat.jpeg" alt="Item Image">
                      <%  } %>                  
                      <div class="info-container">
-                        <h2 class="item-name"><a href=<%= item.url %>><%= item.name %></a></h2>
+                        <h2 class="item-name"><a href=<%= item.url %>><%- item.name %></a></h2>
                         <p class="item-price">$<%= item.price %></p>
                         <% if (item.number_in_stock <= 20) { %>
                            <p class="num-in-stock-alert">Only <%= item.number_in_stock%> left in stock</p>

@@ -262,7 +262,7 @@ exports.item_delete_post = [
 	}),
 ];
 
-// Function to replace encoded characters
+// Function to replace encoded characters (this may be irrelevant with using EJS <%- %>)
 function replaceEncodedCharacters(input) {
     // Replace "&amp;#x2F;" and  "&#x2F;" with "/"
     input = input.replace(/&amp;#x2F;|&#x2F;/g, "/");
