@@ -57,11 +57,11 @@ exports.item_create_post = [
 			let formattedPrice = parseFloat(req.body.item_price).toFixed(2);
 
 			let item;
-			
+
 			// Check if a file is uploaded
 			if (req.file) {
 				// Upload image to cloudinary
-				const result = await cloudinary.uploader.upload(req.file.path);
+				const result = await cloudinary.uploader.upload(req.file.path, { folder: "cat_inventory" });
 
 				item = new Item({
 					name: req.body.item_name,
@@ -140,11 +140,11 @@ exports.item_update_post = [
 			let formattedPrice = parseFloat(req.body.item_price).toFixed(2);
 
 			let item;
-			
+
 			// Check if a file is uploaded
 			if (req.file) {
 				// Upload image to cloudinary
-				const result = await cloudinary.uploader.upload(req.file.path);
+				const result = await cloudinary.uploader.upload(req.file.path, { folder: "cat_inventory" });
 
 				item = new Item({
 					name: req.body.item_name,
@@ -192,15 +192,12 @@ exports.item_update_post = [
 						password_error: "ACCESS DENIED, TRY AGAIN!",
 					});
 				} else {
-					// Update the item object in the database <currItem = the old item>
-					const currItem = await Item.findByIdAndUpdate(req.params.id, item).exec();
-					// If user has a cloudinary_id, delete image from cloudinary
-					if (currItem && currItem.cloudinary_id) {
-						await cloudinary.uploader.destroy(currItem.cloudinary_id);
+					// Update the item object in the database (NOTE: updatedItem == the old item)
+					const updatedItem = await Item.findByIdAndUpdate(req.params.id, item).exec();
+					// If user has a cloudinary_id, delete old image from cloudinary
+					if (updatedItem && updatedItem.cloudinary_id) {
+						await cloudinary.uploader.destroy(updatedItem.cloudinary_id, { folder: "cat_inventory" });
 					}
-
-					// Update the item object in the database
-					await Item.findByIdAndUpdate(req.params.id, item).exec();
 					res.redirect(item.url);
 				}
 			}
@@ -250,11 +247,11 @@ exports.item_delete_post = [
 					password_error: "ACCESS DENIED, TRY AGAIN!",
 				});
 			} else {
-				// Delete item from database <currItem = the old item>
+				// Update the item object in the database
 				const currItem = await Item.findByIdAndDelete(req.params.id).exec();
 				// If user has a cloudinary_id, delete image from cloudinary
 				if (currItem && currItem.cloudinary_id) {
-					await cloudinary.uploader.destroy(currItem.cloudinary_id);
+					await cloudinary.uploader.destroy(currItem.cloudinary_id, { folder: "cat_inventory" });
 				}
 				res.redirect("/inventory/items");
 			}
@@ -264,11 +261,11 @@ exports.item_delete_post = [
 
 // Function to replace encoded characters (this may be irrelevant with using EJS <%- %>)
 function replaceEncodedCharacters(input) {
-    // Replace "&amp;#x2F;" and  "&#x2F;" with "/"
-    input = input.replace(/&amp;#x2F;|&#x2F;/g, "/");
-    
-    // Replace "&#x27;" with single quote "'"
-    input = input.replace(/&#x27;/g, "'");
+	// Replace "&amp;#x2F;" and  "&#x2F;" with "/"
+	input = input.replace(/&amp;#x2F;|&#x2F;/g, "/");
 
-	 return input;
+	// Replace "&#x27;" with single quote "'"
+	input = input.replace(/&#x27;/g, "'");
+
+	return input;
 }
